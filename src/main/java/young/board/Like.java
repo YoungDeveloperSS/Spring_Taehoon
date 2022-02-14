@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Like {
-    private Integer likeNumber;
+    private Integer likeNumber = 0; //디폴트값을 이렇게 표시하는게 맞나?
 
     public void like() {
         likeNumber += 1;

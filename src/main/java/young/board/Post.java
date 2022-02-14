@@ -1,9 +1,12 @@
 package young.board;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 public class Post {
 
     @Id @GeneratedValue
@@ -19,4 +22,18 @@ public class Post {
 
     @Embedded
     private Like likeNumber;
+
+    protected Post() {
+    }
+
+    public static Post createPost(String title, Category category, String writer, String content) {
+        Post post = new Post();
+        post.title = title;
+        post.category = category;
+        post.writer = writer;
+        post.content = content;
+        post.createDate = LocalDateTime.now();
+        post.likeNumber = new Like();
+        return post;
+    }
 }
