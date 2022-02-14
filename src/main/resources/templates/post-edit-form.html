@@ -21,7 +21,7 @@
             <option th:each="categoryValue : ${T(young.board.domain.Category).values()}"
                     th:selected="${categoryValue eq form.category}"
                     th:value="${categoryValue.name()}"
-                    th:text="${categoryValue.name()}">예시</option>
+                    th:text="${categoryValue.getCategory()}">예시</option>
         </select>
     </div>
     <div>

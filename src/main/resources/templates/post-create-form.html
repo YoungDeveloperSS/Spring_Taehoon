@@ -21,7 +21,7 @@
             <option selected disabled th:selected="selected" th:disabled="disabled" value="카테고리를 선택해주세요.">카테고리를 선택해주세요.</option>
             <option th:each="categoryValue : ${T(young.board.domain.Category).values()}"
             th:value="${categoryValue.name()}"
-            th:text="${categoryValue.name()}">예시</option>
+            th:text="${categoryValue.getCategory()}">예시</option>
             <!-- T() 는 뭐지?-->
         </select>
     </div>

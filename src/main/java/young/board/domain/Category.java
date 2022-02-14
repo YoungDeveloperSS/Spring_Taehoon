@@ -1,5 +1,14 @@
 package young.board.domain;
 
+import lombok.Getter;
+
+@Getter
 public enum Category {
-    QUESTION, CHAT, NOTICE; //질문글, 잡담글, 공지사항
+    QUESTION("질문"), CHAT("잡담"), NOTICE("공지사항"); //질문, 잡담, 공지사항
+
+    private String category;
+
+    Category(String category) {
+        this.category = category;
+    }
 }
