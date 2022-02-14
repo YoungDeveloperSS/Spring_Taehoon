@@ -20,11 +20,6 @@ public class PostController {
     public String showPostList(Model model) {
         List<Post> posts = postService.findAll();
         model.addAttribute("posts", posts);
-
-        System.out.println("확인 -> showPostList");
-        for (Post post : posts) {
-            System.out.println("확인 -> post의 id = " + post.getId());
-        }
         return "post-list";
     }
 

@@ -3,8 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>hello</title>
+    <style>
+        table {
+            width: 100%;
+            border: 1px solid #444444;
+        }
+        th, td {
+            border: 1px solid #444444;
+        }
+    </style>
 </head>
 <body>
+<table >
+    <tr>
+        <th>카테고리</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일자</th>
+        <th>추천수</th>
+    </tr>
+    <tr th:each="post: ${posts}">
+        <td th:value="${post.category}" th:text="${post.category}"></td>
+        <td th:value="${post.title}" th:text="${post.title}"
+            th:onclick="|location.href='@{/posts/{postId}(postId=${post.id})}'|"
+            style="cursor:pointer"></td>
+        <td th:value="${post.writer}" th:text="${post.writer}"></td>
+        <td th:value="${post.createDate}" th:text="${post.createDate}"></td>
+        <td th:value="${post.likeNumber}" th:text="${post.likeNumber}"></td>
+    </tr>
+</table>
 메인화면 -> 테이블 형태로 post 보여주기.
 하나의 row에서 제목을 클릭하면 -> posts/id로 보내기
 </body>
