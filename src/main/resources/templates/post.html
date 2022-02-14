@@ -17,7 +17,11 @@
 </div>
 
 <button th:onclick="|location.href='@{/posts/{postId}/edit(postId=${post.id})}'|" th:method="get">수정</button>
-<button th:onclick="|location.href='@{/posts/{postId}(postId=${post.id})}'|" th:method="delete">삭제</button>
+<!--<button th:onclick="|location.href='@{/posts/{postId}(postId=${post.id})}'|" th:method="delete">삭제</button>-->
+<form th:action="@{/posts/{postId}(postId=${post.id})}" th:method="delete">
+    <input type="hidden" name="_method" value="delete"/>
+    <button type="submit">삭제</button>
+</form>
 <!--delete 쓰려면 특정 처리 해야함. 블로그에 적어둔거 찾기-->
 <button th:onclick="|location.href='@{/posts/{postId}/like(postId=${post.id})}'|" th:method="get">좋아요</button>
 <button th:onclick="|location.href='@{/posts/{postId}/dislike(postId=${post.id})}'|" th:method="get">싫어요</button>

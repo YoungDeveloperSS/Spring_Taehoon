@@ -28,7 +28,7 @@ public class PostController {
         return "post-list";
     }
 
-    @GetMapping("/{id}")//양식맞나
+    @GetMapping("/{id}")
     public String showPostDetail(@PathVariable Long id, Model model) {
         Post post = postService.findPost(id);
         model.addAttribute("post", post);
@@ -83,7 +83,6 @@ public class PostController {
         return "redirect:/posts/" + id;
     }
 
-//    @PostMapping("{id}/dislike")
     private void validateCreateFormValues(PostCreateForm form) {
 
         if (form.getTitle().isBlank() || form.getWriter().isBlank() || //TODO 어디서 띄어쓰기 해야하지?? 기억이 안남

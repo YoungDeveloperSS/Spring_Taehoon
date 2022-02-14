@@ -11,6 +11,11 @@ spring:
     username: sa
     password:
 
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
   jpa:
     hibernate:
       ddl-auto: create
