@@ -1,7 +1,8 @@
-package young.board;
+package young.board.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import young.board.domain.Post;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class H2PostRepository implements PostRepository{
+public class H2PostRepository implements PostRepository {
 
     private final EntityManager em;
 

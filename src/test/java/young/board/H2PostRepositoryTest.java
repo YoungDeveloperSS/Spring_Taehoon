@@ -1,21 +1,22 @@
 package young.board;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import young.board.domain.Category;
+import young.board.domain.Post;
+import young.board.repository.PostRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
 class H2PostRepositoryTest {
-    @Autowired PostRepository postRepository;
+    @Autowired
+    PostRepository postRepository;
 
     @Test
     void 게시글_저장() { //게시글 조회도 같이 테스트됨.

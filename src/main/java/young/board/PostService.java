@@ -3,6 +3,10 @@ package young.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import young.board.domain.Category;
+import young.board.domain.Like;
+import young.board.domain.Post;
+import young.board.repository.PostRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +18,6 @@ public class PostService {
     private final PostRepository postRepository;
 
     public Long save(String title, String writer, String content, Category category) {
-//        Post post = new Post(); //TODO 이상하다 왜 안막아주지? protected면 생성 빨간줄 나와야 하는거 아닌가 -> 찾아보기
         Post post = Post.createPost(title, category, writer, content);
         return postRepository.save(post);
     }

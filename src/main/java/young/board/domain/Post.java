@@ -1,4 +1,4 @@
-package young.board;
+package young.board.domain;
 
 import lombok.Getter;
 
