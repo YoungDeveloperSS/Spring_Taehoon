@@ -36,4 +36,21 @@ public class Post {
         post.likeNumber = new Like();
         return post;
     }
+
+    public void update(String title, String writer, String content, Category category) {
+        this.title = title;
+        this.writer = writer;
+        this.content = content;
+        this.category = category;
+    }
+
+    public Like like() {
+        likeNumber.like();
+        return likeNumber;
+    }
+
+    public Like disLike() {
+        likeNumber.disLike();
+        return likeNumber;
+    }
 }
