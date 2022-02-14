@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 class PostServiceTest {
-    //테스트 이후 controller -> service 보면서 해보자. 여기서 입력값 에러 다 잡아내야함. form, dto 만들기.
     @Autowired PostService postService;
     Long savedId1;
     Long savedId2;
