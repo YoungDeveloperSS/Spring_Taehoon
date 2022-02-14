@@ -14,7 +14,8 @@
     </style>
 </head>
 <body>
-<table >
+<input type="button" th:onclick="|location.href='@{/posts/new}'|" value="글쓰기">
+<table>
     <tr>
         <th>카테고리</th>
         <th>제목</th>
@@ -32,7 +33,5 @@
         <td th:value="${post.likeNumber}" th:text="${post.likeNumber}"></td>
     </tr>
 </table>
-메인화면 -> 테이블 형태로 post 보여주기.
-하나의 row에서 제목을 클릭하면 -> posts/id로 보내기
 </body>
 </html>
