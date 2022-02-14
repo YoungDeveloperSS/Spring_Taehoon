@@ -5,10 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-여기에는 특정 게시물의 제목, 내용 .... 다 보여준다.
-수정 버튼 -> get: {id}/edit
-삭제 버튼 -> delete
+<div>
+    <div>제목 : </div>
+    <div th:text="${post.title}"></div>
+    <div>카테고리 : </div>
+    <div th:text="${post.category}"></div>
+    <div>작성자 : </div>
+    <div th:text="${post.writer}"></div>
+    <div>내용 : </div>
+    <div th:text="${post.content}"></div>
+</div>
 
-like, dislike 버튼 만들어야 함.
+<button th:onclick="|location.href='@{/posts/{postId}/edit(postId=${post.id})}'|" th:method="get">수정</button>
+<button th:onclick="|location.href='@{/posts/{postId}(postId=${post.id})}'|" th:method="delete">삭제</button>
+<!--delete 쓰려면 특정 처리 해야함. 블로그에 적어둔거 찾기-->
+<button th:onclick="|location.href='@{/posts/{postId}/like(postId=${post.id})}'|" th:method="get">좋아요</button>
+<button th:onclick="|location.href='@{/posts/{postId}/dislike(postId=${post.id})}'|" th:method="get">싫어요</button>
+
 </body>
 </html>

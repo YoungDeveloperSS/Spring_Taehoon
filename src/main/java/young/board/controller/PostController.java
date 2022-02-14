@@ -32,7 +32,6 @@ public class PostController {
     public String showPostDetail(@PathVariable Long id, Model model) {
         Post post = postService.findPost(id);
         model.addAttribute("post", post);
-        //post -> post폼으로 변경(보여줘야 하는 정보만 보여주기 위해 사용. 이름을 뭐로 해야하지?)
         return "post";
     }
 
@@ -72,10 +71,24 @@ public class PostController {
         return "redirect:/posts/"+savedId;
     }
 
+    @GetMapping("{id}/like")
+    public String likePost(@PathVariable Long id) {
+        postService.likePost(id);
+        return "redirect:/posts/" + id;
+    }
+
+    @GetMapping("{id}/dislike")
+    public String dislikePost(@PathVariable Long id) {
+        postService.disLikePost(id);
+        return "redirect:/posts/" + id;
+    }
+
+//    @PostMapping("{id}/dislike")
     private void validateCreateFormValues(PostCreateForm form) {
+
         if (form.getTitle().isBlank() || form.getWriter().isBlank() || //TODO 어디서 띄어쓰기 해야하지?? 기억이 안남
                 form.getContent() == null || form.getCategory() == null ||
-                form.getTitle().length() < 1 || form.getTitle().length() >20 ||
+                form.getTitle().length() < 1 || form.getTitle().length() > 20 ||
                 form.getWriter().length() < 1 || form.getWriter().length() > 8) {
             throw new IllegalArgumentException("파라미터가 제대로 입력되지 않았습니다.");
         }
