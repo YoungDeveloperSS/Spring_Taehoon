@@ -36,13 +36,13 @@ public class PostController {
         return "post";
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public String deletePost(@PathVariable Long id) {
         postService.deletePost(id);
         return "redirect:/posts";
     }
 
-    @GetMapping("{id}/edit")
+    @GetMapping("/{id}/edit")
     public String editPostForm(@PathVariable Long id, Model model) {
         Post post = postService.findPost(id);
         PostEditForm form = new PostEditForm(post);
@@ -50,7 +50,7 @@ public class PostController {
         return "post-edit-form";
     }
 
-    @PostMapping("{id}/edit")
+    @PostMapping("/{id}/edit")
     public String editPost(@PathVariable Long id, @ModelAttribute PostEditForm postEditForm) { //modelAttribute로 받아야함.
         //데이터 검증
         postService.update(id, postEditForm.getTitle(), postEditForm.getWriter(),

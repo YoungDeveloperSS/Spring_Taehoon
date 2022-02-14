@@ -17,6 +17,7 @@ import java.util.Optional;
 public class PostService {
     private final PostRepository postRepository;
 
+    @Transactional
     public Long save(String title, String writer, String content, Category category) {
         Post post = Post.createPost(title, category, writer, content);
         return postRepository.save(post);
@@ -25,10 +26,12 @@ public class PostService {
     public Post findPost(Long postId) {
         return validatePostExist(postId);
     }
+
     public List<Post> findAll() {
         return postRepository.findAll();
     }
 
+    @Transactional
     public Long update(Long postId, String title, String writer, String content, Category category) {
         Post post = validatePostExist(postId);
         post.update(title, writer, content, category);
@@ -44,17 +47,20 @@ public class PostService {
         return post;
     }
 
+    @Transactional
     public void deletePost(Long postId) {
         Post post = validatePostExist(postId);
         //권한 체크
         postRepository.delete(post);
     }
 
+    @Transactional
     public Like likePost(Long postId) {
         Post post = validatePostExist(postId);
         return post.like();
     }
 
+    @Transactional
     public Like disLikePost(Long postId) {
         Post post = validatePostExist(postId);
         return post.disLike();
