@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
 <div>
     <div>제목 : </div>
     <div th:text="${post.title}"></div>
