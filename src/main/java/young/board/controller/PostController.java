@@ -67,8 +67,18 @@ public class PostController {
 
     @PostMapping("/new")
     public String createPost(@ModelAttribute PostCreateForm form) {
-        //검증
+        //TODO 검증 -> View에서도 검증 해줘야함.
+        validateCreateFormValues(form);
         Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
         return "redirect:/posts/"+savedId;
+    }
+
+    private void validateCreateFormValues(PostCreateForm form) {
+        if (form.getTitle().isBlank() || form.getWriter().isBlank() || //TODO 어디서 띄어쓰기 해야하지?? 기억이 안남
+                form.getContent() == null || form.getCategory() == null ||
+                form.getTitle().length() < 1 || form.getTitle().length() >20 ||
+                form.getWriter().length() < 1 || form.getWriter().length() > 8) {
+            throw new IllegalArgumentException("파라미터가 제대로 입력되지 않았습니다.");
+        }
     }
 }
