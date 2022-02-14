@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import young.board.PostService;
+import young.board.domain.Category;
 import young.board.domain.Post;
 
 import java.util.List;
@@ -45,10 +46,11 @@ public class PostController {
     }
 
     @PostMapping("/{id}/edit")
-    public String editPost(@PathVariable Long id, @ModelAttribute PostEditForm postEditForm) {
-        //데이터 검증
-        postService.update(id, postEditForm.getTitle(), postEditForm.getWriter(),
-                postEditForm.getContent(), postEditForm.getCategory());
+    public String editPost(@PathVariable Long id, @ModelAttribute PostEditForm form) {
+        //TODO 검증 -> View에서도 검증 해줘야함.
+        validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
+        postService.update(id, form.getTitle(), form.getWriter(),
+                form.getContent(), form.getCategory());
         return "redirect:/posts/"+id;
     }
 
@@ -61,7 +63,7 @@ public class PostController {
     @PostMapping("/new")
     public String createPost(@ModelAttribute PostCreateForm form) {
         //TODO 검증 -> View에서도 검증 해줘야함.
-        validateCreateFormValues(form);
+        validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
         Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
         return "redirect:/posts/"+savedId;
     }
@@ -78,13 +80,13 @@ public class PostController {
         return "redirect:/posts/" + id;
     }
 
-    private void validateCreateFormValues(PostCreateForm form) {
-
-        if (form.getTitle().isBlank() || form.getWriter().isBlank() || //TODO 어디서 띄어쓰기 해야하지?? 기억이 안남
-                form.getContent() == null || form.getCategory() == null ||
-                form.getTitle().length() < 1 || form.getTitle().length() > 20 ||
-                form.getWriter().length() < 1 || form.getWriter().length() > 8) {
+    private void validatePostForm(String title, String writer, String content, Category category) {
+        if (title.isBlank() || writer.isBlank() ||
+                content == null || category == null ||
+                title.length() < 1 || title.length() > 20 ||
+                writer.length() < 1 || writer.length() > 8) {
             throw new IllegalArgumentException("파라미터가 제대로 입력되지 않았습니다.");
         }
     }
+
 }
