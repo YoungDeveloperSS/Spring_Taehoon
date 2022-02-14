@@ -5,6 +5,7 @@ import lombok.Getter;
 import javax.persistence.Embeddable;
 
 @Embeddable
+@Getter
 public class Like {
     private Integer likeNumber = 0; //디폴트값을 이렇게 표시하는게 맞나?
 

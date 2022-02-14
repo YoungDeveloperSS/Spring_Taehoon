@@ -1,4 +1,4 @@
-package young.board;
+package young.board.repository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
