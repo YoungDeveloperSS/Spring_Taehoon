@@ -39,13 +39,13 @@ public class PostController {
     @GetMapping("/{id}/edit")
     public String editPostForm(@PathVariable Long id, Model model) {
         Post post = postService.findPost(id);
-        PostEditForm form = new PostEditForm(post);
+        PostEditForm form = PostEditForm.createPostEditForm(post);
         model.addAttribute("form", form);
         return "post-edit-form";
     }
 
     @PostMapping("/{id}/edit")
-    public String editPost(@PathVariable Long id, @ModelAttribute PostEditForm postEditForm) { //modelAttribute로 받아야함.
+    public String editPost(@PathVariable Long id, @ModelAttribute PostEditForm postEditForm) {
         //데이터 검증
         postService.update(id, postEditForm.getTitle(), postEditForm.getWriter(),
                 postEditForm.getContent(), postEditForm.getCategory());

@@ -5,6 +5,32 @@
     <title>Title</title>
 </head>
 <body>
-form 데이터를 먼저 넣어서 보여주고, 바꿀 수 있게 함.
+<form action="post.html" th:action th:object="${form}" method="post">
+    <div>
+        <label for="title">제목</label>
+        <input id="title" th:field="*{title}" th:value="*{title}">
+    </div>
+    <div>
+        <label for="writer">작성자</label>
+        <input id="writer" th:field="*{writer}" th:value="*{writer}">
+    </div>
+    <div>
+        <label for="category">카테고리</label>
+        <select id="category" th:name="category" th:id="category">
+            <option th:each="categoryValue : ${T(young.board.domain.Category).values()}"
+                    th:selected="${categoryValue eq form.category}"
+                    th:value="${categoryValue.name()}"
+                    th:text="${categoryValue.name()}">예시</option>
+        </select>
+    </div>
+    <div>
+        <label for="content">내용</label>
+        <textarea id="content" th:field="*{content}" cols="100" rows="35"></textarea>
+    </div>
+    <input type="submit" value="수정" onclick="location.href = 'post.html'"
+           th:onclick="|location.href='@{/posts/{id}/edit(id=${form.getId()})}'|" th:method="post"/>
+    <input type="button" value="취소" onclick="location.href = 'post.html'"
+           th:onclick="|location.href='@{/posts/{id}(id=${form.getId()})}'|"/>
+</form>
 </body>
 </html>
