@@ -60,7 +60,6 @@ public class PostController {
 
     @GetMapping("/new")
     public String createPostForm(Model model) {
-        //생성폼createPostForm 객체
         model.addAttribute("form", new PostCreateForm());
         return "post-create-form";
     }

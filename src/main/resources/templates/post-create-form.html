@@ -16,7 +16,7 @@
     </div>
     <div>
         <label for="category">카테고리</label>
-        <select id="category">
+        <select id="category" th:name="category" th:id="category">
             <option selected disabled th:selected="selected" th:disabled="disabled" value="카테고리를 선택해주세요.">카테고리를 선택해주세요.</option>
             <option th:each="categoryValue : ${T(young.board.domain.Category).values()}"
             th:value="${categoryValue.name()}"
