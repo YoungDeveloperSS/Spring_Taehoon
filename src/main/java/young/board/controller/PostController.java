@@ -49,7 +49,7 @@ public class PostController {
         return "post-edit-form";
     }
 
-    @PostMapping("/{id}/edit")
+    @PostMapping("/{id}")
     public String editPost(@PathVariable Long id, @ModelAttribute PostEditForm form) {
         //TODO 검증 -> View에서도 검증 해줘야함.
         validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
@@ -64,7 +64,7 @@ public class PostController {
         return "post-create-form";
     }
 
-    @PostMapping("/new")
+    @PostMapping
     public String createPost(@ModelAttribute PostCreateForm form) {
         //TODO 검증 -> View에서도 검증 해줘야함.
         validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());

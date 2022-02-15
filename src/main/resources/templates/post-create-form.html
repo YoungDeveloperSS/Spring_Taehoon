@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-<form action="post.html" th:action th:object="${form}" method="post">
+<form action="post.html" th:action="@{/posts}" th:object="${form}" method="post">
     <div>
         <label for="title">제목</label>
         <input id="title" th:field="*{title}">

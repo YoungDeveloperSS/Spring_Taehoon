@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-<form action="post.html" th:action th:object="${form}" method="post">
+<form action="post.html" th:action="@{/posts/{id}(id=${form.getId()})}" th:object="${form}" method="post">
     <div>
         <label for="title">제목</label>
         <input id="title" th:field="*{title}" th:value="*{title}">
@@ -28,8 +28,7 @@
         <label for="content">내용</label>
         <textarea id="content" th:field="*{content}" cols="100" rows="35"></textarea>
     </div>
-    <input type="submit" value="수정" onclick="location.href = 'post.html'"
-           th:onclick="|location.href='@{/posts/{id}/edit(id=${form.getId()})}'|" th:method="post"/>
+    <input type="submit" value="수정" />
     <input type="button" value="취소" onclick="location.href = 'post.html'"
            th:onclick="|location.href='@{/posts/{id}(id=${form.getId()})}'|"/>
 </form>
