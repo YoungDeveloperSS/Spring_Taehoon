@@ -11,6 +11,8 @@ import young.board.repository.PostRepository;
 import java.util.List;
 import java.util.Optional;
 
+import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class PostService {
     private Post validatePostExist(Long postId) {
         Optional<Post> parsingPost = postRepository.findOne(postId);
         if (parsingPost.isEmpty()) {
-            throw new IllegalStateException("존재하지 않는 게시글입니다.");
+            throw new IllegalStateException(NOT_EXIST_POST_ERROR);
         }
         Post post = parsingPost.get();
         return post;

@@ -12,6 +12,7 @@ import young.board.domain.Post;
 import java.util.List;
 
 import static young.board.constants.PostConstant.*;
+import static young.board.message.ErrorMessage.PARAM_FORM_ERROR;
 
 //테스트 이후 controller -> service 보면서 해보자. 여기서 입력값 에러 다 잡아내야함. form, dto 만들기.
 @Controller
@@ -88,7 +89,7 @@ public class PostController {
                 content == null || category == null ||
                 title.length() < TITLE_MIN_LENGTH || title.length() > TITLE_MAX_LENGTH ||
                 writer.length() < WRITER_MIN_LENGTH || writer.length() > WRITER_MAX_LENGTH) {
-            throw new IllegalArgumentException("파라미터가 제대로 입력되지 않았습니다.");
+            throw new IllegalArgumentException(PARAM_FORM_ERROR);
         }
     }
 
