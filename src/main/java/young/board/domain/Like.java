@@ -4,10 +4,12 @@ import lombok.Getter;
 
 import javax.persistence.Embeddable;
 
+import static young.board.constants.PostConstant.DEFAULT_LIKE_NUM;
+
 @Embeddable
 @Getter
 public class Like {
-    private Integer likeNumber = 0; //디폴트값을 이렇게 표시하는게 맞나?
+    private Integer likeNumber = DEFAULT_LIKE_NUM; //디폴트값을 이렇게 표시하는게 맞나?
 
     public void like() {
         likeNumber += 1;

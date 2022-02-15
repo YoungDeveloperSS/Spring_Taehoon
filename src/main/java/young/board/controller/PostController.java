@@ -5,10 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import young.board.PostService;
+import young.board.constants.PostConstant;
 import young.board.domain.Category;
 import young.board.domain.Post;
 
 import java.util.List;
+
+import static young.board.constants.PostConstant.*;
 
 //테스트 이후 controller -> service 보면서 해보자. 여기서 입력값 에러 다 잡아내야함. form, dto 만들기.
 @Controller
@@ -83,8 +86,8 @@ public class PostController {
     private void validatePostForm(String title, String writer, String content, Category category) {
         if (title.isBlank() || writer.isBlank() ||
                 content == null || category == null ||
-                title.length() < 1 || title.length() > 20 ||
-                writer.length() < 1 || writer.length() > 8) {
+                title.length() < TITLE_MIN_LENGTH || title.length() > TITLE_MAX_LENGTH ||
+                writer.length() < WRITER_MIN_LENGTH || writer.length() > WRITER_MAX_LENGTH) {
             throw new IllegalArgumentException("파라미터가 제대로 입력되지 않았습니다.");
         }
     }
