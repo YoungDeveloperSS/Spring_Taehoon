@@ -30,8 +30,13 @@ public class PostController {
 
     @GetMapping("/{id}")
     public String showPostDetail(@PathVariable Long id, Model model) {
-        Post post = postService.findPost(id);
-        model.addAttribute("post", post);
+        try {
+            Post post = postService.findPost(id);
+            model.addAttribute("post", post);
+        } catch (IllegalStateException e) {
+            model.addAttribute("error", e.getMessage());
+            return "error-page";
+        }
         return "post";
     }
 
