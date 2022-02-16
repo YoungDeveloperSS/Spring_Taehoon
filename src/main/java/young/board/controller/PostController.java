@@ -41,26 +41,44 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public String deletePost(@PathVariable Long id) {
-        postService.deletePost(id);
+    public String deletePost(@PathVariable Long id, Model model) {
+        try {
+            postService.deletePost(id);
+        } catch (IllegalStateException e) {
+            model.addAttribute("error", e.getMessage());
+            return "error-page";
+        }
         return "redirect:/posts";
     }
 
     @GetMapping("/{id}/edit")
     public String editPostForm(@PathVariable Long id, Model model) {
-        Post post = postService.findPost(id);
-        PostEditForm form = PostEditForm.createPostEditForm(post);
-        model.addAttribute("form", form);
+        try {
+            Post post = postService.findPost(id);
+            PostEditForm form = PostEditForm.createPostEditForm(post);
+            model.addAttribute("form", form);
+        } catch (IllegalStateException e) {
+            model.addAttribute("error", e.getMessage());
+            return "error-page";
+        }
         return "post-edit-form";
     }
 
     @PostMapping("/{id}")
-    public String editPost(@PathVariable Long id, @ModelAttribute PostEditForm form) {
+    public String editPost(@PathVariable Long id, @ModelAttribute PostEditForm form, Model model) {
         //TODO 검증 -> View에서도 검증 해줘야함.
-        validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
-        postService.update(id, form.getTitle(), form.getWriter(),
-                form.getContent(), form.getCategory());
-        return "redirect:/posts/"+id;
+        try {
+            validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
+            postService.update(id, form.getTitle(), form.getWriter(),
+                    form.getContent(), form.getCategory());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return "redirect:/";
+        } catch (IllegalStateException e) {
+            model.addAttribute("error", e.getMessage());
+            return "error-page";
+        }
+        return "redirect:/posts/" + id;
     }
 
     @GetMapping("/new")
@@ -70,22 +88,39 @@ public class PostController {
     }
 
     @PostMapping
-    public String createPost(@ModelAttribute PostCreateForm form) {
+    public String createPost(@ModelAttribute PostCreateForm form, Model model) {
         //TODO 검증 -> View에서도 검증 해줘야함.
-        validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
-        Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
-        return "redirect:/posts/"+savedId;
+        try {
+            validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
+            Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
+            return "redirect:/posts/" + savedId;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return "redirect:/";
+        } catch (IllegalStateException e) {
+            model.addAttribute("error", e.getMessage());
+            return "error-page";
+        }
+        //어? 리턴 없어도 돌아가나??
     }
-
     @GetMapping("{id}/like")
-    public String likePost(@PathVariable Long id) {
-        postService.likePost(id);
+    public String likePost(@PathVariable Long id, Model model) {
+        try {
+            postService.likePost(id);
+        } catch (IllegalStateException e) {
+
+        }
         return "redirect:/posts/" + id;
     }
 
     @GetMapping("{id}/dislike")
-    public String dislikePost(@PathVariable Long id) {
-        postService.disLikePost(id);
+    public String dislikePost(@PathVariable Long id, Model model) {
+        try {
+            postService.disLikePost(id);
+        } catch (IllegalStateException e) {
+            model.addAttribute("error", e.getMessage());
+            return "error-page";
+        }
         return "redirect:/posts/" + id;
     }
 
@@ -95,6 +130,7 @@ public class PostController {
                 title.length() < TITLE_MIN_LENGTH || title.length() > TITLE_MAX_LENGTH ||
                 writer.length() < WRITER_MIN_LENGTH || writer.length() > WRITER_MAX_LENGTH) {
             throw new IllegalArgumentException(PARAM_FORM_ERROR);
+            //view에서 검증을 다해줬는데 여기에 들어왔다? 사용자의 악의적인 조작. -> 무슨 처리 해주지 말자. 바로 가장 최상단으로 보내기.
         }
     }
 
