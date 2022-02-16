@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div>
+    <div>제목 : </div>
+    <div th:text="${post.title}"></div>
+    <div>카테고리 : </div>
+    <div th:text="${post.category}"></div>
+    <div>작성자 : </div>
+    <div th:text="${post.writer}"></div>
+    <div>내용 : </div>
+    <div th:text="${post.content}"></div>
+</div>
+
+<button th:onclick="|location.href='@{/posts/{postId}/edit(postId=${post.id})}'|" th:method="get">수정</button>
+<form th:action="@{/posts/{postId}(postId=${post.id})}" th:method="delete">
+    <input type="hidden" name="_method" value="delete"/>
+    <button type="submit">삭제</button>
+</form>
+<!--delete 쓰려면 특정 처리 해야함. 블로그에 적어둔거 찾기-->
+<button th:onclick="|location.href='@{/posts/{postId}/like(postId=${post.id})}'|" th:method="get">좋아요</button>
+<button th:onclick="|location.href='@{/posts/{postId}/dislike(postId=${post.id})}'|" th:method="get">싫어요</button>
+
+</body>
+</html>

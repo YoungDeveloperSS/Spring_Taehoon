@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<form action="post.html" th:action="@{/posts/{id}(id=${form.getId()})}" th:object="${form}" method="post">
+    <div>
+        <label for="title">제목</label>
+        <input id="title" th:field="*{title}" th:value="*{title}">
+    </div>
+    <div>
+        <label for="writer">작성자</label>
+        <input id="writer" th:field="*{writer}" th:value="*{writer}">
+    </div>
+    <div>
+        <label for="category">카테고리</label>
+        <select id="category" th:name="category" th:id="category">
+            <option th:each="categoryValue : ${T(young.board.domain.Category).values()}"
+                    th:selected="${categoryValue eq form.category}"
+                    th:value="${categoryValue.name()}"
+                    th:text="${categoryValue.getCategory()}">예시</option>
+        </select>
+    </div>
+    <div>
+        <label for="content">내용</label>
+        <textarea id="content" th:field="*{content}" cols="100" rows="35"></textarea>
+    </div>
+    <input type="submit" value="수정" />
+    <input type="button" value="취소" onclick="location.href = 'post.html'"
+           th:onclick="|location.href='@{/posts/{id}(id=${form.getId()})}'|"/>
+</form>
+</body>
+</html>
