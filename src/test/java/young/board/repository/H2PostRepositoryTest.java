@@ -20,7 +20,13 @@ class H2PostRepositoryTest {
 
     @Test
     void 게시글_저장() { //게시글 조회도 같이 테스트됨.
-        Post post = Post.createPost("제목", Category.CHAT, "작성자", "내용~~~~");
+        Post post = Post.createPost()
+                .title("제목")
+                .category(Category.CHAT)
+                .writer("작성자")
+                .content("내용")
+                .build();
+//        Post post = Post.createPost("제목", Category.CHAT, "작성자", "내용~~~~");
         Long saveId = postRepository.save(post);
 
         Post savedPost = postRepository.findOne(saveId).get();
@@ -33,7 +39,12 @@ class H2PostRepositoryTest {
 
     @Test
     void 게시글_삭제() {
-        Post targetPost = Post.createPost("제목", Category.CHAT, "작성자", "내용~~~~");
+        Post targetPost = Post.createPost()
+                .title("제목")
+                .category(Category.CHAT)
+                .writer("작성자")
+                .content("내용")
+                .build();
         Long saveId = postRepository.save(targetPost);
         Post savedPost = postRepository.findOne(saveId).get();
         postRepository.delete(savedPost);
@@ -49,9 +60,19 @@ class H2PostRepositoryTest {
 
     @Test
     void 게시글_전체_조회() {
-        Post post1 = Post.createPost("제목", Category.CHAT, "작성자", "내용~~~~");
+        Post post1 = Post.createPost()
+                .title("제목")
+                .category(Category.CHAT)
+                .writer("작성자")
+                .content("내용")
+                .build();
         postRepository.save(post1);
-        Post post2 = Post.createPost("제목2", Category.QUESTION, "작성자", "내용~~~~");
+        Post post2 = Post.createPost()
+                .title("제목2")
+                .category(Category.QUESTION)
+                .writer("작성자")
+                .content("내용~~~~")
+                .build();
         postRepository.save(post2);
 
         assertThat(postRepository.findAll().size()).isEqualTo(2);

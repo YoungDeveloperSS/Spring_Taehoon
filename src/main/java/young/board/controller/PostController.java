@@ -102,8 +102,8 @@ public class PostController {
             Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             return "redirect:/posts/" + savedId;
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return "redirect:/";
+            model.addAttribute("error", e.getMessage());
+            return "error-page";
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
             return "error-page";

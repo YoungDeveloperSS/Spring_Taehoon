@@ -20,7 +20,12 @@ public class PostService {
 
     @Transactional
     public Long save(String title, String writer, String content, Category category) {
-        Post post = Post.createPost(title, category, writer, content);
+        Post post = Post.createPost()
+                .title(title)
+                .category(category)
+                .writer(writer)
+                .content(content)
+                .build();
         return postRepository.save(post);
     }
 
