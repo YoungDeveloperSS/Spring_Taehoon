@@ -1,12 +1,15 @@
 package young.board.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
     @Id @GeneratedValue
     @Column(name = "post_id")
@@ -19,9 +22,6 @@ public class Post {
     private String writer;
     private LocalDateTime createDate;
     private String content;
-
-    protected Post() {
-    }
 
     public static Post createPost(String title, Category category, String writer, String content) {
         Post post = new Post();

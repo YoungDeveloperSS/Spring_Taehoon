@@ -1,6 +1,8 @@
 package young.board.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,6 +11,7 @@ import static young.board.message.ErrorMessage.ALREADY_CLICKED_LIKE_ERROR;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Recommendation {
     @Id
     @GeneratedValue

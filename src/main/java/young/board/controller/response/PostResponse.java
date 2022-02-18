@@ -1,6 +1,8 @@
 package young.board.controller.response;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import young.board.domain.Category;
 import young.board.domain.Post;
 
@@ -8,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostResponse {
     @Id
     @GeneratedValue

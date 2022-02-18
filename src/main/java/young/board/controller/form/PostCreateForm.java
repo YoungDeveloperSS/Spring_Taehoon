@@ -1,6 +1,8 @@
 package young.board.controller.form;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import young.board.domain.Category;
 

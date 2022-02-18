@@ -1,8 +1,11 @@
 package young.board.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor(access=AccessLevel.PRIVATE)
 public enum RecommendationStatus {
     LIKE("좋아요"), DISLIKE("싫어요"), NONE("상태없음"); //TODO NONE 내부를 null로 하는게 맞을까? 다 만든 뒤 고민하기.
 

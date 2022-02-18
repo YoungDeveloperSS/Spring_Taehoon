@@ -2,6 +2,7 @@ package young.board.controller.form;
 
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import young.board.domain.Category;
 import young.board.domain.Post;
@@ -15,7 +16,9 @@ import static young.board.constants.PostConstant.WRITER_MAX_LENGTH;
 import static young.board.message.ErrorMessage.*;
 import static young.board.message.ErrorMessage.CATEGORY_NOT_INPUT_ERROR;
 
-@Getter @Setter
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostEditForm {
     @Setter(AccessLevel.PRIVATE)
     private Long id;
