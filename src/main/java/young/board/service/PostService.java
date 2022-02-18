@@ -51,19 +51,7 @@ public class PostService {
     @Transactional
     public void deletePost(Long postId) {
         Post post = validatePostExist(postId);
-        //권한 체크
+        //TODO 로그인 구현한 이후에 권한 체크 들어가야 함.
         postRepository.delete(post);
     }
-
-//    @Transactional
-//    public Likes likePost(Long postId) {
-//        Post post = validatePostExist(postId);
-//        return post.like();
-//    }
-//
-//    @Transactional
-//    public Likes disLikePost(Long postId) {
-//        Post post = validatePostExist(postId);
-//        return post.disLike();
-//    }
 }

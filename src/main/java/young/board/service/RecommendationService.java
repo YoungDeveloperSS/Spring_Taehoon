@@ -14,6 +14,9 @@ import young.board.repository.user.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
+import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
+import static young.board.message.ErrorMessage.NOT_EXIST_USER_ERROR;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -60,7 +63,7 @@ public class RecommendationService {
     private Users validateUserIsExisted(Long userId) {
         Optional<Users> wrappingUser = userRepository.findOne(userId);
         if (wrappingUser.isEmpty()) {
-            throw new IllegalArgumentException("사용자의 해당 ID는 존재하지 않습니다.");
+            throw new IllegalArgumentException(NOT_EXIST_USER_ERROR);
         }
         return wrappingUser.get();
     }
@@ -68,7 +71,7 @@ public class RecommendationService {
     private Post validatePostIsExisted(Long postId) {
         Optional<Post> wrappingPost = postRepository.findOne(postId);
         if (wrappingPost.isEmpty()) {
-            throw new IllegalArgumentException("게시물의 해당 ID는 존재하지 않습니다.");
+            throw new IllegalArgumentException(NOT_EXIST_POST_ERROR);
         }
         return wrappingPost.get();
     }

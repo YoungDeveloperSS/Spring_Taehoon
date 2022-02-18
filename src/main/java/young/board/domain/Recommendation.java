@@ -4,6 +4,9 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
+import static young.board.message.ErrorMessage.ALREADY_CLICKED_DISLIKE_ERROR;
+import static young.board.message.ErrorMessage.ALREADY_CLICKED_LIKE_ERROR;
+
 @Getter
 @Entity
 public class Recommendation {
@@ -31,19 +34,20 @@ public class Recommendation {
 
     public void dislike() {
         if (this.recommendationStatus == RecommendationStatus.DISLIKE) {
-            throw new IllegalArgumentException("이미 싫어요를 누른 게시물입니다.");
+            throw new IllegalArgumentException(ALREADY_CLICKED_DISLIKE_ERROR);
         }
         this.recommendationStatus = RecommendationStatus.DISLIKE;
+    }
+
+    public void like() {
+        if (this.recommendationStatus == RecommendationStatus.LIKE) {
+            throw new IllegalArgumentException(ALREADY_CLICKED_LIKE_ERROR);
+        }
+        this.recommendationStatus = RecommendationStatus.LIKE;
     }
 
     public void cancel() {
         this.recommendationStatus = RecommendationStatus.NONE;
     }
 
-    public void like() {
-        if (this.recommendationStatus == RecommendationStatus.LIKE) {
-            throw new IllegalArgumentException("이미 좋아요를 누른 게시물입니다.");
-        }
-        this.recommendationStatus = RecommendationStatus.LIKE;
-    }
 }

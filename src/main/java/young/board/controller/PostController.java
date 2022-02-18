@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import static young.board.constants.PostConstant.*;
 import static young.board.message.ErrorMessage.PARAM_FORM_ERROR;
 
-//테스트 이후 controller -> service 보면서 해보자. 여기서 입력값 에러 다 잡아내야함. form, dto 만들기.
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/posts")
@@ -109,7 +108,7 @@ public class PostController {
             model.addAttribute("error", e.getMessage());
             return "error-page";
         }
-        //어? 리턴 없어도 돌아가나??
+        //TODO 왜 여기 리턴 없어도 돌아가는건지 공부해보기.
     }
 
     private void validatePostForm(String title, String writer, String content, Category category) {
