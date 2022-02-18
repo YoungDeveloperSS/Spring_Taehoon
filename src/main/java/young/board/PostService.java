@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.domain.Category;
-import young.board.domain.Like;
+import young.board.domain.Likes;
 import young.board.domain.Post;
 import young.board.repository.PostRepository;
 
@@ -56,15 +56,15 @@ public class PostService {
         postRepository.delete(post);
     }
 
-    @Transactional
-    public Like likePost(Long postId) {
-        Post post = validatePostExist(postId);
-        return post.like();
-    }
-
-    @Transactional
-    public Like disLikePost(Long postId) {
-        Post post = validatePostExist(postId);
-        return post.disLike();
-    }
+//    @Transactional
+//    public Likes likePost(Long postId) {
+//        Post post = validatePostExist(postId);
+//        return post.like();
+//    }
+//
+//    @Transactional
+//    public Likes disLikePost(Long postId) {
+//        Post post = validatePostExist(postId);
+//        return post.disLike();
+//    }
 }

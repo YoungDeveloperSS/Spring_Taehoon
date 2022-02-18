@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 public class Post {
-
     @Id @GeneratedValue
+    @Column(name = "post_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -19,9 +19,6 @@ public class Post {
     private String writer;
     private LocalDateTime createDate;
     private String content;
-
-    @Embedded
-    private Like likeNumber;
 
     protected Post() {
     }
@@ -33,7 +30,6 @@ public class Post {
         post.writer = writer;
         post.content = content;
         post.createDate = LocalDateTime.now();
-        post.likeNumber = new Like();
         return post;
     }
 
@@ -42,15 +38,5 @@ public class Post {
         this.writer = writer;
         this.content = content;
         this.category = category;
-    }
-
-    public Like like() {
-        likeNumber.like();
-        return likeNumber;
-    }
-
-    public Like disLike() {
-        likeNumber.disLike();
-        return likeNumber;
     }
 }

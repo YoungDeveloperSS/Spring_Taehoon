@@ -103,26 +103,26 @@ public class PostController {
         }
         //어? 리턴 없어도 돌아가나??
     }
-    @GetMapping("{id}/like")
-    public String likePost(@PathVariable Long id, Model model) {
-        try {
-            postService.likePost(id);
-        } catch (IllegalStateException e) {
-
-        }
-        return "redirect:/posts/" + id;
-    }
-
-    @GetMapping("{id}/dislike")
-    public String dislikePost(@PathVariable Long id, Model model) {
-        try {
-            postService.disLikePost(id);
-        } catch (IllegalStateException e) {
-            model.addAttribute("error", e.getMessage());
-            return "error-page";
-        }
-        return "redirect:/posts/" + id;
-    }
+//    @GetMapping("{id}/like")
+//    public String likePost(@PathVariable Long id, Model model) {
+//        try {
+//            postService.likePost(id);
+//        } catch (IllegalStateException e) {
+//
+//        }
+//        return "redirect:/posts/" + id;
+//    }
+//
+//    @GetMapping("{id}/dislike")
+//    public String dislikePost(@PathVariable Long id, Model model) {
+//        try {
+//            postService.disLikePost(id);
+//        } catch (IllegalStateException e) {
+//            model.addAttribute("error", e.getMessage());
+//            return "error-page";
+//        }
+//        return "redirect:/posts/" + id;
+//    }
 
     private void validatePostForm(String title, String writer, String content, Category category) {
         if (title.isBlank() || writer.isBlank() ||
