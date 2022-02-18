@@ -1,4 +1,4 @@
-package young.board.repository;
+package young.board.repository.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class H2UserRepository implements UserRepository{
+public class H2UserRepository implements UserRepository {
     private final EntityManager em;
 
 

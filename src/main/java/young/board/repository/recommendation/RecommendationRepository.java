@@ -1,4 +1,4 @@
-package young.board.repository;
+package young.board.repository.recommendation;
 
 import young.board.domain.Recommendation;
 

@@ -4,13 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import young.board.PostService;
-import young.board.RecommendationService;
-import young.board.constants.PostConstant;
+import young.board.controller.form.PostCreateForm;
+import young.board.controller.form.PostEditForm;
+import young.board.controller.response.PostResponse;
+import young.board.service.PostService;
+import young.board.service.RecommendationService;
 import young.board.domain.Category;
 import young.board.domain.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

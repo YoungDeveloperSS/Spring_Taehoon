@@ -1,4 +1,4 @@
-package young.board.controller;
+package young.board.controller.response;
 
 import lombok.Getter;
 import young.board.domain.Category;
