@@ -22,9 +22,17 @@
     <input type="hidden" name="_method" value="delete"/>
     <button type="submit">삭제</button>
 </form>
-<!--delete 쓰려면 특정 처리 해야함. 블로그에 적어둔거 찾기-->
-<button th:onclick="|location.href='@{/posts/{postId}/like(postId=${post.id})}'|" th:method="get">좋아요</button>
-<button th:onclick="|location.href='@{/posts/{postId}/dislike(postId=${post.id})}'|" th:method="get">싫어요</button>
-
+<form th:action="@{/posts/{postId}/like(postId=${post.id})}" th:method="post">
+    <input type="text" name="userId" value="1" readonly style= "display:none">
+    <input type="submit" value="좋아요" />
+</form>
+<form th:action="@{/posts/{postId}/dislike(postId=${post.id})}" th:method="post">
+    <input type="text" name="userId" value="1" readonly style= "display:none">
+    <input type="submit" value="싫어요" />
+</form>
+<form th:action="@{/posts/{postId}/like-cancel(postId=${post.id})}" th:method="post">
+    <input type="text" name="userId" value="1" readonly style= "display:none">
+    <input type="submit" value="취소" />
+</form>
 </body>
 </html>

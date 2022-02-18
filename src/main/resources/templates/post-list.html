@@ -24,14 +24,14 @@
         <th>작성일자</th>
         <th>추천수</th>
     </tr>
-    <tr th:each="post: ${posts}">
+    <tr th:each="post: ${postResponses}">
         <td th:value="${post.category}" th:text="${post.category.getCategory()}"></td>
         <td th:value="${post.title}" th:text="${post.title}"
             th:onclick="|location.href='@{/posts/{postId}(postId=${post.id})}'|"
             style="cursor:pointer"></td>
         <td th:value="${post.writer}" th:text="${post.writer}"></td>
         <td th:value="${post.createDate}" th:text="${post.createDate}"></td>
-        <td th:value="${post.likeNumber}" th:text="${post.likeNumber}"></td>
+        <td th:value="${post.getLikeNumber()}" th:text="${post.getLikeNumber()}"></td>
     </tr>
 </table>
 </body>

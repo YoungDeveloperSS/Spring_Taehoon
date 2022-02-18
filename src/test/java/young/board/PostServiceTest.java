@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.domain.Category;
-import young.board.domain.Likes;
 import young.board.domain.Post;
 
 import static org.assertj.core.api.Assertions.assertThat;

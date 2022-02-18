@@ -11,7 +11,6 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class H2PostRepository implements PostRepository {
-
     private final EntityManager em;
 
     @Override

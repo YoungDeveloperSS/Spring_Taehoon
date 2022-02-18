@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.domain.Category;
-import young.board.domain.Likes;
 import young.board.domain.Post;
 import young.board.repository.PostRepository;
 

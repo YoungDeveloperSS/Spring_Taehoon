@@ -5,11 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import young.board.PostService;
+import young.board.RecommendationService;
 import young.board.constants.PostConstant;
 import young.board.domain.Category;
 import young.board.domain.Post;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static young.board.constants.PostConstant.*;
 import static young.board.message.ErrorMessage.PARAM_FORM_ERROR;
@@ -20,11 +23,15 @@ import static young.board.message.ErrorMessage.PARAM_FORM_ERROR;
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
+    private final RecommendationService recommendationService;
 
     @GetMapping
     public String showPostList(Model model) {
         List<Post> posts = postService.findAll();
-        model.addAttribute("posts", posts);
+        List<PostResponse> postResponses = posts.stream().map(post ->
+                        PostResponse.create(post, recommendationService.calculateLikesCnt(post.getId())))
+                .collect(Collectors.toList());
+        model.addAttribute("postResponses", postResponses);
         return "post-list";
     }
 
@@ -103,26 +110,6 @@ public class PostController {
         }
         //어? 리턴 없어도 돌아가나??
     }
-//    @GetMapping("{id}/like")
-//    public String likePost(@PathVariable Long id, Model model) {
-//        try {
-//            postService.likePost(id);
-//        } catch (IllegalStateException e) {
-//
-//        }
-//        return "redirect:/posts/" + id;
-//    }
-//
-//    @GetMapping("{id}/dislike")
-//    public String dislikePost(@PathVariable Long id, Model model) {
-//        try {
-//            postService.disLikePost(id);
-//        } catch (IllegalStateException e) {
-//            model.addAttribute("error", e.getMessage());
-//            return "error-page";
-//        }
-//        return "redirect:/posts/" + id;
-//    }
 
     private void validatePostForm(String title, String writer, String content, Category category) {
         if (title.isBlank() || writer.isBlank() ||
