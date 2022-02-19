@@ -26,7 +26,7 @@ public class H2PostRepository implements PostRepository {
 
     @Override
     public List<Post> findAll() {
-        return em.createQuery("select p from Post p",Post.class)
+        return em.createQuery("select p from Post p where p.isNotUsing = false",Post.class)
                 .getResultList();
     }
 

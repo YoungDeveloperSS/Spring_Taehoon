@@ -61,6 +61,6 @@ public class PostService {
     public void deletePost(Long postId) {
         Post post = validatePostExist(postId); //db에 해당 id가 있나?
         //TODO 로그인 구현한 이후에 권한 체크 들어가야 함.
-        post.delete();//있으면 delete
+        post.delete();
     }
 }
