@@ -68,6 +68,8 @@ public class Post {
     }
 
     public void update(String title, String writer, String content, Category category) {
+        // TODO 검증 필요 없는게 이 타입은 컨트롤러에서 확인을 했음
+
         this.title = title;
         this.writer = writer;
         this.content = content;

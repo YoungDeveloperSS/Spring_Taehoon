@@ -9,6 +9,8 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 
+import static young.board.message.ErrorMessage.NOT_EXIST_COMMENT_ERROR;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -54,5 +56,17 @@ public class Comment {
         if (!StringUtils.hasText(writer)) {
             throw new IllegalArgumentException("댓글 작성자가 입력되지 않았습니다.");
         }
+    }
+
+    public void update(String commentContent, String writer) {
+        this.comment = commentContent;
+        this.writer = writer;
+    }
+
+    public void delete() {
+        if (isNotUsing) {
+            throw new IllegalArgumentException(NOT_EXIST_COMMENT_ERROR);
+        }
+        isNotUsing = true;
     }
 }
