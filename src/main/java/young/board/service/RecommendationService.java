@@ -81,7 +81,10 @@ public class RecommendationService {
         Users user = validateUserIsExisted(userId);
         Optional<Recommendation> wrappingLike = likeRepository.findRecommendationByPostIdAndUserId(postId, userId);
         if (wrappingLike.isEmpty()) {
-            Recommendation recommendation = Recommendation.createRecommendation(post, user);
+            Recommendation recommendation = Recommendation.builder()
+                    .user(user)
+                    .post(post)
+                    .build();
             likeRepository.save(recommendation);
             return recommendation;
         }

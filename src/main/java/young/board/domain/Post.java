@@ -33,6 +33,9 @@ public class Post {
     @NotEmpty @Column(nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private boolean isNotUsing; //todo not이라는 이름으로 변수를 짓는게 맞을까? 이중으로 부정하는 코드는 알아보기 힘든데
+
     @Builder(builderClassName = "createPost", builderMethodName = "createPost")
     private Post(Category category, String title, String writer, String content) {
 //        validatePostValues(category, title, writer, content);
@@ -47,6 +50,7 @@ public class Post {
         this.writer = writer;
         this.content = content;
         this.createDate = LocalDateTime.now();
+        this.isNotUsing = false;
     }
 
     private void validatePostValues(Category category, String title, String writer, String content) {
