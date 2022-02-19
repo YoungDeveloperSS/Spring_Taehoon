@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Transactional
 class CommentTest {
     // id같은 경우 Spring이 만들어주는데 여기에 어떻게 넣지?
     Post post1;
