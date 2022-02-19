@@ -1,6 +1,8 @@
 package young.board.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,35 +16,33 @@ public class RecommendationController {
     private final RecommendationService recommendationService;
 
     @PostMapping("/posts/{postId}/like")
-    public String likePost(@PathVariable Long postId, Model model, @RequestParam Long userId) {
+    public ResponseEntity<String> likePost(@PathVariable Long postId, Model model, @RequestParam Long userId) {
         try {
             recommendationService.likePost(postId, userId);
+            return new ResponseEntity<>("like success", HttpStatus.OK); //300번대로
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            return "error-page";
+            return ResponseEntity.badRequest().build();
         }
-        return "redirect:/posts/" + postId;
     }
 
     @PostMapping("/posts/{postId}/dislike")
-    public String dislikePost(@PathVariable Long postId, Model model, @RequestParam Long userId) {
+    public ResponseEntity<String> dislikePost(@PathVariable Long postId, Model model, @RequestParam Long userId) {
         try {
             recommendationService.dislikePost(postId, userId);
+            return new ResponseEntity<>("dislike success", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            return "error-page";
+            return ResponseEntity.badRequest().build();
         }
-        return "redirect:/posts/" + postId;
     }
 
     @PostMapping("/posts/{postId}/like-cancel")
-    public String cancelRecommendation(@PathVariable Long postId, Model model, @RequestParam Long userId) {
+    public ResponseEntity<String> cancelRecommendation(@PathVariable Long postId, Model model, @RequestParam Long userId) {
         try {
             recommendationService.cancelLikeOrDislike(postId, userId);
+            return new ResponseEntity<>("cancel success", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            return "error-page";
+            return ResponseEntity.badRequest().build();
         }
-        return "redirect:/posts/" + postId;
+//        return "redirect:/posts/" + postId;
     }
 }
