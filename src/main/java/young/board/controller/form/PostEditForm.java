@@ -20,6 +20,7 @@ import static young.board.message.ErrorMessage.CATEGORY_NOT_INPUT_ERROR;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostEditForm {
+
     @Setter(AccessLevel.PRIVATE)
     private Long id;
 

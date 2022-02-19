@@ -14,6 +14,4 @@ public abstract class ErrorMessage {
 
     public static final String ALREADY_CLICKED_DISLIKE_ERROR = "이미 싫어요를 누른 게시물입니다.";
     public static final String ALREADY_CLICKED_LIKE_ERROR = "이미 좋아요를 누른 게시물입니다.";
-
-
 }

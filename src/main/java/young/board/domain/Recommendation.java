@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 import static young.board.message.ErrorMessage.ALREADY_CLICKED_DISLIKE_ERROR;
 import static young.board.message.ErrorMessage.ALREADY_CLICKED_LIKE_ERROR;
@@ -30,14 +29,6 @@ public class Recommendation {
     @Enumerated(EnumType.STRING)
     private RecommendationStatus recommendationStatus;
 
-    public static Recommendation createRecommendation(Post post, Users user) {
-        Recommendation like = new Recommendation();
-        like.post = post;
-        like.user = user;
-        like.recommendationStatus = RecommendationStatus.NONE;
-        return like;
-    }
-
     @Builder
     private Recommendation(Post post, Users user) {
         Assert.notNull(post, "Post 들어오지 않음");
@@ -45,7 +36,7 @@ public class Recommendation {
 
         this.post = post;
         this.user = user;
-        this.recommendationStatus = RecommendationStatus.NONE;
+        this.recommendationStatus = RecommendationStatus.NOT_USING;
     }
 
     public void dislike() {
@@ -63,7 +54,7 @@ public class Recommendation {
     }
 
     public void cancel() {
-        this.recommendationStatus = RecommendationStatus.NONE;
+        this.recommendationStatus = RecommendationStatus.NOT_USING;
     }
 
 }

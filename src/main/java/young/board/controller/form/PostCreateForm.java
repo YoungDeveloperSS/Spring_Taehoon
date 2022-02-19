@@ -1,8 +1,6 @@
 package young.board.controller.form;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import young.board.domain.Category;
 
@@ -15,6 +13,7 @@ import static young.board.message.ErrorMessage.*;
 
 @Getter @Setter
 public class PostCreateForm {
+
     @NotBlank(message = TITLE_NOT_INPUT_ERROR)
     @Size(min = TITLE_MIN_LENGTH, max = TITLE_MAX_LENGTH, message = TITLE_LENGTH_ERROR)
     private String title;

@@ -14,7 +14,6 @@ import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@Builder
 public class Post {
     @Id @GeneratedValue
     @Column(name = "post_id")
@@ -40,12 +39,10 @@ public class Post {
 
     @Builder(builderClassName = "createPost", builderMethodName = "createPost")
     private Post(Category category, String title, String writer, String content) {
-//        validatePostValues(category, title, writer, content);
         Assert.notNull(category, "Post 생성 중 카테고리가 빠졌습니다.");
         Assert.hasText(title, "Post 생성 중 제목이 빠졌습니다.");
         Assert.hasText(writer, "Post 생성 중 작성자가 빠졌습니다.");
         Assert.hasLength(content, "Post 생성 중 내용이 빠졌습니다.");
-        // hasText -> " " False hasLength -> " " True
 
         this.category = category;
         this.title = title;
@@ -80,7 +77,7 @@ public class Post {
     public void delete() {
         if (isNotUsing) {
             throw new IllegalArgumentException(NOT_EXIST_POST_ERROR);
-        } //검증 이미 해주고 넘긴건데 또 해줘야하나? 안전하게 하려면 하는게 나을지도
+        } //TODO 검증 이미 해주고 넘긴건데 또 해줘야하나? 안전하게 하려면 하는게 나을지도
         this.isNotUsing = true;
     }
 }

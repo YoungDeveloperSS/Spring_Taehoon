@@ -117,7 +117,6 @@ public class PostController {
                 title.length() < TITLE_MIN_LENGTH || title.length() > TITLE_MAX_LENGTH ||
                 writer.length() < WRITER_MIN_LENGTH || writer.length() > WRITER_MAX_LENGTH) {
             throw new IllegalArgumentException(PARAM_FORM_ERROR);
-            //view에서 검증을 다해줬는데 여기에 들어왔다? 사용자의 악의적인 조작. -> 무슨 처리 해주지 말자. 바로 가장 최상단으로 보내기.
         }
     }
 
