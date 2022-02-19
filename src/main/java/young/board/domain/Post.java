@@ -9,6 +9,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -73,5 +75,12 @@ public class Post {
         this.writer = writer;
         this.content = content;
         this.category = category;
+    }
+
+    public void delete() {
+        if (isNotUsing) {
+            throw new IllegalArgumentException(NOT_EXIST_POST_ERROR);
+        } //검증 이미 해주고 넘긴건데 또 해줘야하나? 안전하게 하려면 하는게 나을지도
+        this.isNotUsing = true;
     }
 }

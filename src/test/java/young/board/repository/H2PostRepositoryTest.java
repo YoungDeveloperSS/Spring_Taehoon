@@ -37,21 +37,21 @@ class H2PostRepositoryTest {
         assertThat(savedPost.getWriter()).isEqualTo(post.getWriter());
     }
 
-    @Test
-    void 게시글_삭제() {
-        Post targetPost = Post.createPost()
-                .title("제목")
-                .category(Category.CHAT)
-                .writer("작성자")
-                .content("내용")
-                .build();
-        Long saveId = postRepository.save(targetPost);
-        Post savedPost = postRepository.findOne(saveId).get();
-        postRepository.delete(savedPost);
-
-        List<Post> allPosts = postRepository.findAll();
-        assertThat(allPosts.stream().anyMatch(post -> post.getId() == saveId)).isFalse();
-    }
+//    @Test
+//    void 게시글_삭제() {
+//        Post targetPost = Post.createPost()
+//                .title("제목")
+//                .category(Category.CHAT)
+//                .writer("작성자")
+//                .content("내용")
+//                .build();
+//        Long saveId = postRepository.save(targetPost);
+//        Post savedPost = postRepository.findOne(saveId).get();
+//        postRepository.delete(savedPost);
+//
+//        List<Post> allPosts = postRepository.findAll();
+//        assertThat(allPosts.stream().anyMatch(post -> post.getId() == saveId)).isFalse();
+//    }
 
     @Test
     void 존재_않는_게시글_조회() {

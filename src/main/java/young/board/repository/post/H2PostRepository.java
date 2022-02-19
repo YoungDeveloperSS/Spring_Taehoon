@@ -32,8 +32,8 @@ public class H2PostRepository implements PostRepository {
 
 //    public Long update(Long postId, String title, String writer, String content, Category category) { ->서비스로 이동
 
-    @Override
-    public void delete(Post post) {
-        em.remove(post);
-    }
+//    @Override ->db를 진짜 지우는게아니라 속성을 통해 나타낼거. 그래서 service로 이동.
+//    public void delete(Post post) {
+//        em.remove(post);
+//    }
 }
