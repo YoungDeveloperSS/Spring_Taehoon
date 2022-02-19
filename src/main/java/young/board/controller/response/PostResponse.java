@@ -4,30 +4,27 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import young.board.domain.Category;
+import young.board.domain.Comment;
 import young.board.domain.Post;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostResponse {
-    @Id
-    @GeneratedValue
-    @Column(name = "post_id")
+
     private Long id;
-
-    @Enumerated(EnumType.STRING)
     private Category category;
-
     private String title;
     private String writer;
     private LocalDateTime createDate;
     private String content;
+    private List<Comment> comments;
 
     private Integer likeNumber;
 
-    public static PostResponse create(Post post, Integer calculateLikesCnt) {
+    public static PostResponse create(Post post, Integer calculateLikesCnt, List<Comment> comments) {
         PostResponse postResponse = new PostResponse();
         postResponse.id = post.getId();
         postResponse.title = post.getTitle();
@@ -37,6 +34,8 @@ public class PostResponse {
         postResponse.content = post.getContent();
         postResponse.createDate = post.getCreateDate();
         postResponse.likeNumber = calculateLikesCnt;
+        postResponse.comments = comments;
+
         return postResponse;
     }
 }
