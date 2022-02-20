@@ -10,6 +10,7 @@ import young.board.post.repository.PostRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static young.board.message.ErrorMessage.NOT_EXIST_COMMENT_ERROR;
 import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
@@ -33,13 +34,14 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public List<Comment> inqueryCommentsOnPost(Long postId) {
-        return commentRepository.findAllUsingPostId(postId);
+    public List<CommentResponseDto> inqueryCommentsOnPost(Long postId) { // 쓸일 있나? 양방향 매핑을 해줘서 쓸일 없을듯싶은데.
+        List<Comment> comments = commentRepository.findAllUsingPostId(postId);
+        return comments.stream().map(comment -> CommentResponseDto.from(comment)).collect(Collectors.toList());
     }
 
     @Transactional
     public Long update(Long commentId, String content, String writer) {
-        // 일일히 파라미터로 받기 싫으면 서비스계층 DTO를 만들어라.
+        // 일일히 파라미터로 받기 싫으면 서비스 request DTO를 만들어라.
         Comment comment = validateCommentExist(commentId);
         comment.update(content, writer);
         return comment.getId();

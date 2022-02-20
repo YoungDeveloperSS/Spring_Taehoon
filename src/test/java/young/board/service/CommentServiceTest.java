@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import young.board.comment.CommentResponseDto;
 import young.board.comment.CommentService;
 import young.board.domain.Category;
 import young.board.domain.Comment;
@@ -65,7 +66,7 @@ class CommentServiceTest {
         Long commentId1 = commentService.comment(savedPostId, "댓글내용", "댓작성자");
         commentService.delete(commentId1);
 
-        List<Comment> comments = commentService.inqueryCommentsOnPost(commentId1);
+        List<CommentResponseDto> comments = commentService.inqueryCommentsOnPost(commentId1);
         assertThat(comments.size()).isEqualTo(0);
     }
 
