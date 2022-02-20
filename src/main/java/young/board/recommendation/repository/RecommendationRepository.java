@@ -13,8 +13,8 @@ public interface RecommendationRepository {
 
     public List<Recommendation> findAll();
 
-    public List<Recommendation> findRecommendationByPostId(Long recommendationId);
+    public List<Recommendation> findRecommendationsByPostId(Long recommendationId);
 
-    Optional<Recommendation> findRecommendationByPostIdAndUserId(Long postId, Long userId);
+    Optional<Recommendation> findOneByPostIdAndUserId(Long postId, Long userId);
 
 }

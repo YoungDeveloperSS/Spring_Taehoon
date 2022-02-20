@@ -26,7 +26,7 @@ public class RecommendationService {
     private final UserRepository userRepository;
 
     public Integer calculateLikesCnt(Long postId) {
-        List<Recommendation> recommendations = likeRepository.findRecommendationByPostId(postId);
+        List<Recommendation> recommendations = likeRepository.findRecommendationsByPostId(postId);
         Integer likeCnt = 0;
         for (Recommendation recommendation : recommendations) {
             if (recommendation.getRecommendationStatus() == RecommendationStatus.LIKE) {
@@ -79,7 +79,7 @@ public class RecommendationService {
     private Recommendation getRecommendation(Long postId, Long userId) {
         Post post = validatePostIsExisted(postId);
         Users user = validateUserIsExisted(userId);
-        Optional<Recommendation> wrappingLike = likeRepository.findRecommendationByPostIdAndUserId(postId, userId);
+        Optional<Recommendation> wrappingLike = likeRepository.findOneByPostIdAndUserId(postId, userId);
         if (wrappingLike.isEmpty()) {
             Recommendation recommendation = Recommendation.builder()
                     .user(user)

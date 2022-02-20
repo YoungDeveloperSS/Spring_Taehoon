@@ -31,14 +31,14 @@ public class H2RecommendationRepository implements RecommendationRepository {
     }
 
     @Override
-    public List<Recommendation> findRecommendationByPostId(Long postId) {
+    public List<Recommendation> findRecommendationsByPostId(Long postId) {
         return em.createQuery("select r from Recommendation r where r.post.id = :postId", Recommendation.class)
                 .setParameter("postId", postId)
                 .getResultList();
     }
 
     @Override
-    public Optional<Recommendation> findRecommendationByPostIdAndUserId(Long postId, Long userId) {
+    public Optional<Recommendation> findOneByPostIdAndUserId(Long postId, Long userId) {
         return em.createQuery("select r from Recommendation r " +
                         "where r.post.id = :postId and r.user.id = :userId", Recommendation.class)
                 .setParameter("postId", postId)
