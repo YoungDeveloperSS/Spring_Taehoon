@@ -56,7 +56,7 @@ class CommentServiceTest {
         commentService.update(commentId1, "변경내용1", "작성자도변경");
 
         Comment comment = commentRepository.findOne(commentId1).get();
-        assertThat(comment.getComment()).isEqualTo("변경내용1");
+        assertThat(comment.getContent()).isEqualTo("변경내용1");
         assertThat(comment.getWriter()).isEqualTo("작성자도변경");
     }
 

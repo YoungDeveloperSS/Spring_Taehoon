@@ -23,11 +23,11 @@ public class CommentService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Long comment(Long postId, String commentContent, String writer) {
+    public Long comment(Long postId, String content, String writer) {
         Post post = validatePostExist(postId);
         Comment comment = Comment.builder()
                 .post(post)
-                .comment(commentContent) // TODO Comment도메인에 comment속성은 안만드는게 낫겠다. 이후에 리팩토링 해주자.
+                .content(content) // TODO Comment도메인에 comment속성은 안만드는게 낫겠다. 이후에 리팩토링 해주자.
                 .writer(writer)
                 .build();
         return commentRepository.save(comment);
@@ -38,10 +38,10 @@ public class CommentService {
     }
 
     @Transactional
-    public Long update(Long commentId, String commentContent, String writer) {
+    public Long update(Long commentId, String content, String writer) {
         // 일일히 파라미터로 받기 싫으면 서비스계층 DTO를 만들어라.
         Comment comment = validateCommentExist(commentId);
-        comment.update(commentContent, writer);
+        comment.update(content, writer);
         return comment.getId();
     }
 

@@ -73,7 +73,7 @@ class H2CommentRepositoryTest {
         Comment comment = commentRepository.findOne(comment1.getId()).get();
 
         assertThat(comment.getId()).isEqualTo(comment1.getId());
-        assertThat(comment.getComment()).isEqualTo(comment1.getComment());
+        assertThat(comment.getContent()).isEqualTo(comment1.getContent());
         assertThat(comment.getPost()).isEqualTo(comment1.getPost());
         assertThat(comment.getWriter()).isEqualTo(comment1.getWriter());
     }

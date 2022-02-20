@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -25,7 +24,7 @@ public class Comment {
     private Post post;
 
     @Column(nullable = false)
-    private String comment;
+    private String content;
 
     @Column(nullable = false)
     private String writer;
@@ -39,19 +38,19 @@ public class Comment {
 //    나중에 대댓글 같은 기능 나오면 순서가 필요해질듯
 
     @Builder
-    private Comment(Post post, String comment, String writer) {
-        validate(post, comment, writer);
+    private Comment(Post post, String content, String writer) {
+        validate(post, content, writer);
         this.post = post;
-        this.comment = comment;
+        this.content = content;
         this.writer = writer;
         this.isNotUsing = false;
     }
 
-    private void validate(Post post, String comment, String writer) {
+    private void validate(Post post, String content, String writer) {
         if (post == null) {
             throw new IllegalArgumentException("해당되는 게시물을 찾을 수 없습니다.");
         }
-        if (!StringUtils.hasText(comment)) {
+        if (!StringUtils.hasText(content)) {
             throw new IllegalArgumentException("댓글 내용이 입력되지 않았습니다.");
         }
         if (!StringUtils.hasText(writer)) {
@@ -59,8 +58,8 @@ public class Comment {
         }
     }
 
-    public void update(String commentContent, String writer) {
-        this.comment = commentContent;
+    public void update(String content, String writer) {
+        this.content = content;
         this.writer = writer;
     }
 

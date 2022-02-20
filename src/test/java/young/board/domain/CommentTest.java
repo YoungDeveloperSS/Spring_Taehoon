@@ -1,13 +1,10 @@
 package young.board.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CommentTest {
     // id같은 경우 Spring이 만들어주는데 여기에 어떻게 넣지?
@@ -51,7 +48,7 @@ class CommentTest {
     @Test
     void 댓글_생성_정상() {
         assertThat(comment1.getPost()).isEqualTo(post1);
-        assertThat(comment1.getComment()).isEqualTo("댓글1");
+        assertThat(comment1.getContent()).isEqualTo("댓글1");
         assertThat(comment1.getWriter()).isEqualTo("댓작성자1");
     }
 
