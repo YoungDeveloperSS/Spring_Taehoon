@@ -30,15 +30,15 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public PostResponseDto findPost(Long postId) {
+    public PostResponseServiceDto findPost(Long postId) {
         Post post = validatePostExist(postId);
-        return PostResponseDto.from(post);
+        return PostResponseServiceDto.from(post);
     }
 
-    public List<PostResponseDto> findAll() {
+    public List<PostResponseServiceDto> findAll() {
         List<Post> posts = postRepository.findAll();
         return posts.stream()
-                .map(post -> PostResponseDto.from(post))
+                .map(post -> PostResponseServiceDto.from(post))
                 .collect(Collectors.toList());
     }
 

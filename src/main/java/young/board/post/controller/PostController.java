@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import young.board.post.controller.form.PostCreateForm;
 import young.board.post.controller.form.PostEditForm;
 import young.board.comment.CommentService;
-import young.board.post.service.PostResponseDto;
+import young.board.post.service.PostResponseServiceDto;
 import young.board.post.service.PostService;
 import young.board.recommendation.RecommendationService;
 import young.board.domain.Category;
-import young.board.domain.Post;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,26 +25,24 @@ import static young.board.message.ErrorMessage.PARAM_FORM_ERROR;
 public class PostController {
     private final PostService postService;
     private final RecommendationService recommendationService;
-    private final CommentService commentService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<PostResponseDto> showPostList() { //TODO 컨트롤러에 entity가 넘어오지 않게 바꿔보자.
-        List<Post> posts = postService.findAll();
-        List<PostResponseDto> postResponses = posts.stream().map(post ->
-                        PostResponseDto.from(post,
-                                recommendationService.calculateLikesCnt(post.getId()),
-                                commentService.inqueryCommentsOnPost(post.getId())))
+    public List<PostResponseDto> showPostList() {
+        List<PostResponseServiceDto> postResponseServiceDtos = postService.findAll();
+        return postResponseServiceDtos.stream().map(postResponseServiceDto ->
+                        PostResponseDto.from(postResponseServiceDto,
+                                recommendationService.calculateLikesCnt(postResponseServiceDto.getId())))
                 .collect(Collectors.toList());
-        return postResponses;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PostResponseDto> showPostDetail(@PathVariable Long id) {
         try {
-            Post post = postService.findPost(id);
-            PostResponseDto postResponse = PostResponseDto.from(post, recommendationService.calculateLikesCnt(post.getId()), commentService.inqueryCommentsOnPost(post.getId()));
-            return new ResponseEntity<>(postResponse, HttpStatus.OK);
+            PostResponseServiceDto postResponseServiceDto = postService.findPost(id);
+            PostResponseDto postResponseDto = PostResponseDto.from(postResponseServiceDto,
+                    recommendationService.calculateLikesCnt(postResponseServiceDto.getId()));
+            return new ResponseEntity<>(postResponseDto, HttpStatus.OK);
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         }
@@ -68,8 +65,8 @@ public class PostController {
     @GetMapping("/{id}/edit")
     public ResponseEntity<PostEditForm> editPostForm(@PathVariable Long id) {
         try {
-            Post post = postService.findPost(id);
-            PostEditForm form = PostEditForm.createPostEditForm(post);
+            PostResponseServiceDto postResponseDto = postService.findPost(id);
+            PostEditForm form = PostEditForm.createPostEditForm(postResponseDto);
             return new ResponseEntity<>(form, HttpStatus.OK);
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();

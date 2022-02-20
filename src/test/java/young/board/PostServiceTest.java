@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.domain.Category;
-import young.board.domain.Post;
-import young.board.post.service.PostResponseDto;
+import young.board.post.service.PostResponseServiceDto;
 import young.board.post.service.PostService;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,7 +32,7 @@ class PostServiceTest {
 
     @Test
     void 게시글_저장_조회() { //하나의 테스트 하나의 기능인데, 한번에 두 개가 테스트 되는 경우에는 어떻게 만들어야 하지?
-        PostResponseDto findPost = postService.findPost(savedId1);
+        PostResponseServiceDto findPost = postService.findPost(savedId1);
         assertThat(findPost.getTitle()).isEqualTo("title");
         assertThat(findPost.getWriter()).isEqualTo("writer");
         assertThat(findPost.getContent()).isEqualTo("content~~~~");
@@ -54,10 +53,10 @@ class PostServiceTest {
 
     @Test
     void 게시글_수정() {
-        PostResponseDto findPost = postService.findPost(savedId3);
+        PostResponseServiceDto findPost = postService.findPost(savedId3);
         Long updateId = postService.update(findPost.getId(), "제목변경", "작성자변경", null, Category.NOTICE);
 
-        PostResponseDto updatePost = postService.findPost(updateId);
+        PostResponseServiceDto updatePost = postService.findPost(updateId);
 
         assertThat(updatePost.getId()).isEqualTo(findPost.getId());
         assertThat(updatePost.getTitle()).isEqualTo("제목변경");

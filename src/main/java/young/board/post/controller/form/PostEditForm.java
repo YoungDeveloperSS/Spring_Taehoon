@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import young.board.domain.Category;
-import young.board.domain.Post;
+import young.board.post.service.PostResponseServiceDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -38,13 +38,13 @@ public class PostEditForm {
     @NotNull(message = CATEGORY_NOT_INPUT_ERROR)
     private Category category;
 
-    public static PostEditForm createPostEditForm(Post post) {
+    public static PostEditForm createPostEditForm(PostResponseServiceDto postResponseDto) {
         PostEditForm postEditForm = new PostEditForm();
-        postEditForm.setId(post.getId());
-        postEditForm.setTitle(post.getTitle());
-        postEditForm.setWriter(post.getWriter());
-        postEditForm.setContent(post.getContent());
-        postEditForm.setCategory(post.getCategory());
+        postEditForm.setId(postResponseDto.getId());
+        postEditForm.setTitle(postResponseDto.getTitle());
+        postEditForm.setWriter(postResponseDto.getWriter());
+        postEditForm.setContent(postResponseDto.getContent());
+        postEditForm.setCategory(postResponseDto.getCategory());
         return postEditForm;
     }
 

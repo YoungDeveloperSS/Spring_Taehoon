@@ -8,6 +8,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
 
@@ -36,6 +38,10 @@ public class Post {
 
     @Column(nullable = false)
     private boolean isNotUsing; //todo not이라는 이름으로 변수를 짓는게 맞을까? 이중으로 부정하는 코드는 알아보기 힘든데
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments = new ArrayList<>();
+
 
     @Builder(builderClassName = "createPost", builderMethodName = "createPost")
     private Post(Category category, String title, String writer, String content) {
