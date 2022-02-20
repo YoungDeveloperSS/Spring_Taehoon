@@ -6,9 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.domain.Category;
 import young.board.domain.Post;
-import young.board.repository.post.PostRepository;
-
-import java.util.List;
+import young.board.post.repository.PostRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

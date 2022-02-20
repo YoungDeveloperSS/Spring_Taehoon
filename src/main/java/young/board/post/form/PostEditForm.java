@@ -1,4 +1,4 @@
-package young.board.controller.form;
+package young.board.post.form;
 
 import lombok.AccessLevel;
 import lombok.Getter;

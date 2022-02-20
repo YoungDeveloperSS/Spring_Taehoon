@@ -1,4 +1,4 @@
-package young.board.controller.response;
+package young.board.post;
 
 import lombok.AccessLevel;
 import lombok.Getter;

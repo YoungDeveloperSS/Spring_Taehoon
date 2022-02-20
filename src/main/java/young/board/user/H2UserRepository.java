@@ -1,4 +1,4 @@
-package young.board.repository.user;
+package young.board.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

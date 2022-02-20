@@ -1,4 +1,4 @@
-package young.board.repository.post;
+package young.board.post.repository;
 
 import young.board.domain.Post;
 

@@ -1,4 +1,4 @@
-package young.board.service;
+package young.board.recommendation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,9 +7,9 @@ import young.board.domain.RecommendationStatus;
 import young.board.domain.Recommendation;
 import young.board.domain.Post;
 import young.board.domain.Users;
-import young.board.repository.recommendation.RecommendationRepository;
-import young.board.repository.post.PostRepository;
-import young.board.repository.user.UserRepository;
+import young.board.recommendation.repository.RecommendationRepository;
+import young.board.post.repository.PostRepository;
+import young.board.user.UserRepository;
 
 import java.util.List;
 import java.util.Optional;

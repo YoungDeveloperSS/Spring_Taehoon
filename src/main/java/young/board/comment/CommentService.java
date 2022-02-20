@@ -1,12 +1,12 @@
-package young.board.service;
+package young.board.comment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.domain.Comment;
 import young.board.domain.Post;
-import young.board.repository.comment.CommentRepository;
-import young.board.repository.post.PostRepository;
+import young.board.comment.repository.CommentRepository;
+import young.board.post.repository.PostRepository;
 
 import java.util.List;
 import java.util.Optional;

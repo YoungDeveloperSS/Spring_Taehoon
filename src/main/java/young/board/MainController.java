@@ -1,4 +1,4 @@
-package young.board.controller;
+package young.board;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

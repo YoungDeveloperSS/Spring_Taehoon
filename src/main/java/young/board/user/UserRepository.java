@@ -1,4 +1,4 @@
-package young.board.repository.user;
+package young.board.user;
 
 import young.board.domain.Users;
 

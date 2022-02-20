@@ -1,4 +1,4 @@
-package young.board.repository.recommendation;
+package young.board.recommendation.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

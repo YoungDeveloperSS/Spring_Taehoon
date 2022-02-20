@@ -1,28 +1,29 @@
 package young.board.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import young.board.comment.CommentService;
 import young.board.domain.Category;
 import young.board.domain.Comment;
-import young.board.repository.comment.CommentRepository;
+import young.board.post.PostService;
+import young.board.comment.repository.CommentRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
 class CommentServiceTest {
-    @Autowired CommentService commentService;
+    @Autowired
+    CommentService commentService;
     @Autowired CommentRepository commentRepository;
-    @Autowired PostService postService;
+    @Autowired
+    PostService postService;
 
     Long savedPostId;
     Long savedPostId2;

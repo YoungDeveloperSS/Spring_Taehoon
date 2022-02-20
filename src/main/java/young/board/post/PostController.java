@@ -1,16 +1,14 @@
-package young.board.controller;
+package young.board.post;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import young.board.controller.form.PostCreateForm;
-import young.board.controller.form.PostEditForm;
-import young.board.controller.response.PostResponse;
-import young.board.service.CommentService;
-import young.board.service.PostService;
-import young.board.service.RecommendationService;
+import young.board.post.form.PostCreateForm;
+import young.board.post.form.PostEditForm;
+import young.board.comment.CommentService;
+import young.board.recommendation.RecommendationService;
 import young.board.domain.Category;
 import young.board.domain.Post;
 

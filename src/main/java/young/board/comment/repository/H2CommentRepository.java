@@ -1,4 +1,4 @@
-package young.board.repository.comment;
+package young.board.comment.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
