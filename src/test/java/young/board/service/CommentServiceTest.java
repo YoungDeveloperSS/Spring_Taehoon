@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import young.board.comment.CommentService;
 import young.board.domain.Category;
 import young.board.domain.Comment;
-import young.board.post.PostService;
+import young.board.post.service.PostService;
 import young.board.comment.repository.CommentRepository;
 
 import java.util.List;

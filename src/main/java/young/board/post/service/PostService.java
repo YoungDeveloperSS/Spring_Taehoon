@@ -1,4 +1,4 @@
-package young.board.post;
+package young.board.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,7 @@ import young.board.post.repository.PostRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
 
@@ -29,13 +30,16 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public Post findPost(Long postId) {
-        return validatePostExist(postId);
+    public PostResponseDto findPost(Long postId) {
+        Post post = validatePostExist(postId);
+        return PostResponseDto.from(post);
     }
 
-    public List<Post> findAll() {
-        //삭제된 애들 다 걸러줘야함.
-        return postRepository.findAll();
+    public List<PostResponseDto> findAll() {
+        List<Post> posts = postRepository.findAll();
+        return posts.stream()
+                .map(post -> PostResponseDto.from(post))
+                .collect(Collectors.toList());
     }
 
     @Transactional

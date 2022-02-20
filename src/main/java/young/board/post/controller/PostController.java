@@ -1,13 +1,15 @@
-package young.board.post;
+package young.board.post.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import young.board.post.form.PostCreateForm;
-import young.board.post.form.PostEditForm;
+import young.board.post.controller.form.PostCreateForm;
+import young.board.post.controller.form.PostEditForm;
 import young.board.comment.CommentService;
+import young.board.post.service.PostResponseDto;
+import young.board.post.service.PostService;
 import young.board.recommendation.RecommendationService;
 import young.board.domain.Category;
 import young.board.domain.Post;
@@ -27,11 +29,11 @@ public class PostController {
     private final CommentService commentService;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK) //OK말고 다른 상황은 없으니까
-    public List<PostResponse> showPostList() {
+    @ResponseStatus(HttpStatus.OK)
+    public List<PostResponseDto> showPostList() { //TODO 컨트롤러에 entity가 넘어오지 않게 바꿔보자.
         List<Post> posts = postService.findAll();
-        List<PostResponse> postResponses = posts.stream().map(post ->
-                        PostResponse.create(post,
+        List<PostResponseDto> postResponses = posts.stream().map(post ->
+                        PostResponseDto.from(post,
                                 recommendationService.calculateLikesCnt(post.getId()),
                                 commentService.inqueryCommentsOnPost(post.getId())))
                 .collect(Collectors.toList());
@@ -39,10 +41,10 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostResponse> showPostDetail(@PathVariable Long id) {
+    public ResponseEntity<PostResponseDto> showPostDetail(@PathVariable Long id) {
         try {
             Post post = postService.findPost(id);
-            PostResponse postResponse = PostResponse.create(post, recommendationService.calculateLikesCnt(post.getId()), commentService.inqueryCommentsOnPost(post.getId()));
+            PostResponseDto postResponse = PostResponseDto.from(post, recommendationService.calculateLikesCnt(post.getId()), commentService.inqueryCommentsOnPost(post.getId()));
             return new ResponseEntity<>(postResponse, HttpStatus.OK);
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
