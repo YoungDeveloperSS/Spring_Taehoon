@@ -42,7 +42,7 @@ public class PostController {
             PostResponseServiceDto postResponseServiceDto = postService.findPost(id);
             PostResponseDto postResponseDto = PostResponseDto.from(postResponseServiceDto,
                     recommendationService.calculateLikesCnt(postResponseServiceDto.getId()));
-            return new ResponseEntity<>(postResponseDto, HttpStatus.OK);
+            return ResponseEntity.ok(postResponseDto);
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         }
@@ -52,7 +52,7 @@ public class PostController {
     public ResponseEntity<Object> deletePost(@PathVariable Long id) {
         try {
             postService.deletePost(id);
-            return new ResponseEntity<>("delete complete", HttpStatus.OK);
+            return ResponseEntity.ok("delete complete");
 //            TODO 질문하기 : 어떻게 RestController에서 redirect할 수 있지? 이 방식으로 하면 DELETE 기능이 존재 안안하고 에러가 뜨는데,
 //             아마 ~/posts DELETE가 실행되는 게 아닌가 싶음. 인터넷 찾아도 못찾겠다는 느낌. 질문 한 번 드려보자.
 
@@ -67,7 +67,7 @@ public class PostController {
         try {
             PostResponseServiceDto postResponseDto = postService.findPost(id);
             PostEditForm form = PostEditForm.createPostEditForm(postResponseDto);
-            return new ResponseEntity<>(form, HttpStatus.OK);
+            return ResponseEntity.ok(form);
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         }
@@ -81,7 +81,7 @@ public class PostController {
             postService.update(id, form.getTitle(), form.getWriter(),
                     form.getContent(), form.getCategory());
             //이런 경우 id값이 필요한거같은데, id 넘겨야 하나?
-            return new ResponseEntity<>("update complete", HttpStatus.OK);
+            return ResponseEntity.ok("update complete");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         } catch (IllegalStateException e) {
@@ -102,7 +102,7 @@ public class PostController {
         try {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
-            return new ResponseEntity<>("create complete", HttpStatus.OK);
+            return ResponseEntity.ok("create complete");
             //이런 경우 id값이 필요한거같은데, id 넘겨야 하나?
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();

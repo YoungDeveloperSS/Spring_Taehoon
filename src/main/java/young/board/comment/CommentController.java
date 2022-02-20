@@ -17,7 +17,7 @@ public class CommentController {
         try {
             //TODO form 검증
             commentService.update(commentId, commentForm.getContent(), commentForm.getWriter());
-            return new ResponseEntity<>("comment edit OK", HttpStatus.OK);
+            return ResponseEntity.ok("comment edit complete");
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         } //IllegalArgu... -> 400에러
@@ -28,7 +28,7 @@ public class CommentController {
         try {
             //TODO form 검증
             commentService.delete(commentId);
-            return new ResponseEntity<>("comment delete complete", HttpStatus.OK);
+            return ResponseEntity.ok("comment delete complete");
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         } //IllegalArgu... -> 400에러
@@ -39,7 +39,7 @@ public class CommentController {
         try {
             //TODO form 검증
             commentService.comment(postId, commentForm.getContent(), commentForm.getWriter());
-            return new ResponseEntity<>("comment complete", HttpStatus.OK);
+            return ResponseEntity.ok("comment complete");
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         } //IllegalArgu... -> 400에러

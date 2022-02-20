@@ -28,7 +28,7 @@ public class CommentService {
         Post post = validatePostExist(postId);
         Comment comment = Comment.builder()
                 .post(post)
-                .content(content) // TODO Comment도메인에 comment속성은 안만드는게 낫겠다. 이후에 리팩토링 해주자.
+                .content(content)
                 .writer(writer)
                 .build();
         return commentRepository.save(comment);
@@ -71,7 +71,7 @@ public class CommentService {
             throw new IllegalStateException(NOT_EXIST_POST_ERROR);
         }
         Post post = parsingPost.get();
-        if (post.isNotUsing()) { //todo 왜 메서드가 자동으로 만들어지는지 알아보기.
+        if (post.isNotUsing()) {
             throw new IllegalStateException(NOT_EXIST_POST_ERROR);
         }
         return post;

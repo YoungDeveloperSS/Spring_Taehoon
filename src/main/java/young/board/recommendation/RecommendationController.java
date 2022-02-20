@@ -17,7 +17,7 @@ public class RecommendationController {
     public ResponseEntity<String> likePost(@PathVariable Long postId, @RequestParam Long userId) {
         try {
             recommendationService.likePost(postId, userId);
-            return new ResponseEntity<>("like success", HttpStatus.OK); //300번대로
+            return ResponseEntity.ok("like success"); //300번대로
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
@@ -27,7 +27,7 @@ public class RecommendationController {
     public ResponseEntity<String> dislikePost(@PathVariable Long postId, @RequestParam Long userId) {
         try {
             recommendationService.dislikePost(postId, userId);
-            return new ResponseEntity<>("dislike success", HttpStatus.OK);
+            return ResponseEntity.ok("dislike success");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
@@ -37,7 +37,7 @@ public class RecommendationController {
     public ResponseEntity<String> cancelRecommendation(@PathVariable Long postId, @RequestParam Long userId) {
         try {
             recommendationService.cancelLikeOrDislike(postId, userId);
-            return new ResponseEntity<>("cancel success", HttpStatus.OK);
+            return ResponseEntity.ok("cancel success");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
