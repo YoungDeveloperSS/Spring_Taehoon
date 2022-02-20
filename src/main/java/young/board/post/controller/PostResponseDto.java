@@ -1,5 +1,6 @@
 package young.board.post.controller;
 
+import lombok.Getter;
 import young.board.domain.Category;
 import young.board.domain.Comment;
 import young.board.post.service.PostResponseServiceDto;
@@ -7,6 +8,7 @@ import young.board.post.service.PostResponseServiceDto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
 public class PostResponseDto {
 
     private Long id;

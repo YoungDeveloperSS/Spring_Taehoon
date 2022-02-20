@@ -35,8 +35,8 @@ public class PostService {
         return PostResponseServiceDto.from(post);
     }
 
-    public List<PostResponseServiceDto> findAll() {
-        List<Post> posts = postRepository.findAll();
+    public List<PostResponseServiceDto> findAll(int page) {
+        List<Post> posts = postRepository.findAll(page);
         return posts.stream()
                 .map(post -> PostResponseServiceDto.from(post))
                 .collect(Collectors.toList());

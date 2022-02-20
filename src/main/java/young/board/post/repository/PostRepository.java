@@ -10,6 +10,6 @@ public interface PostRepository {
 
     public Optional<Post> findOne(Long postId);
 
-    public List<Post> findAll();
+    public List<Post> findAll(int page);
 
 }

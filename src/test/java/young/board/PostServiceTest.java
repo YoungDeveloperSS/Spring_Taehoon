@@ -48,7 +48,7 @@ class PostServiceTest {
 
     @Test
     void 게시글_전체_조회() {
-        assertThat(postService.findAll().size()).isEqualTo(4);
+        assertThat(postService.findAll(0).size()).isEqualTo(4);
     }
 
     @Test

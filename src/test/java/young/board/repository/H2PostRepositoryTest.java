@@ -73,7 +73,7 @@ class H2PostRepositoryTest {
                 .build();
         postRepository.save(post2);
 
-        assertThat(postRepository.findAll().size()).isEqualTo(2);
+        assertThat(postRepository.findAll(0).size()).isEqualTo(2);
     }
 
 }

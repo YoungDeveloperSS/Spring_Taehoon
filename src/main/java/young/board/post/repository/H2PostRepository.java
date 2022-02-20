@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+import static young.board.constants.PostConstant.POST_CNT_PER_PAGE;
+
 @Repository
 @RequiredArgsConstructor
 public class H2PostRepository implements PostRepository {
@@ -25,8 +27,10 @@ public class H2PostRepository implements PostRepository {
     }
 
     @Override
-    public List<Post> findAll() {
+    public List<Post> findAll(int page) {
         return em.createQuery("select p from Post p where p.isNotUsing = false",Post.class)
+                .setFirstResult((page-1)*POST_CNT_PER_PAGE) //1페이지 -> 0번째부터 9까지
+                .setMaxResults(POST_CNT_PER_PAGE)
                 .getResultList();
     }
 
