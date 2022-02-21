@@ -3,6 +3,7 @@ package young.board.post.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import young.board.image.repository.ImageRepository;
 import young.board.post.Category;
 import young.board.post.Post;
 import young.board.post.repository.PostRepository;
@@ -18,6 +19,9 @@ import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final ImageRepository imageRepository;
+    //TODO 이미지 삭제가 여기서 이뤄져도 괜찮나?
+    // 근데 순서상 게시물 삭제 -> 연관되어 모든 images들 삭제면 여기 있어야 할지도. 이거 연관관계 관련된거일까. 공부 필요할거같음
 
     @Transactional
     public Long save(String title, String writer, String content, Category category) {
@@ -66,5 +70,6 @@ public class PostService {
         Post post = validatePostExist(postId); //db에 해당 id가 있나?
         //TODO 로그인 구현한 이후에 권한 체크 들어가야 함.
         post.delete();
+        imageRepository.deleteAllByPost(post);
     }
 }
