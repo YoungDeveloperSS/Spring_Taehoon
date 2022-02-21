@@ -7,6 +7,7 @@ import young.board.post.Category;
 import young.board.comment.Comment;
 import young.board.post.Post;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 

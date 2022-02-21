@@ -108,4 +108,13 @@ public class ImageService {
     private boolean isChangeOrder(Image image, ImageInfo imageInfo) {
         return image.getId() == imageInfo.getId() && (image.getOrder() != imageInfo.getOrder());
     }
+
+    /**
+     * 이미지들 삭제
+     */
+    @Transactional
+    public void deleteImagesThisPost(Long postId) {
+        Post post = validatePost(postId);
+        imageRepository.deleteAllByPost(post);
+    }
 }

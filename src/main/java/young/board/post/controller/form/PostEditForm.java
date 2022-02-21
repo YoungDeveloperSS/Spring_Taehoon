@@ -4,12 +4,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import young.board.image.Image;
 import young.board.post.Category;
 import young.board.post.service.PostResponseServiceDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.util.List;
 
 import static young.board.constants.PostConstant.*;
 import static young.board.constants.PostConstant.WRITER_MAX_LENGTH;
@@ -38,13 +41,16 @@ public class PostEditForm {
     @NotNull(message = CATEGORY_NOT_INPUT_ERROR)
     private Category category;
 
-    public static PostEditForm createPostEditForm(PostResponseServiceDto postResponseDto) {
+    private List<Image> images;
+
+    public static PostEditForm createPostEditForm(PostResponseServiceDto postResponseDto, List<Image> images) {
         PostEditForm postEditForm = new PostEditForm();
         postEditForm.setId(postResponseDto.getId());
         postEditForm.setTitle(postResponseDto.getTitle());
         postEditForm.setWriter(postResponseDto.getWriter());
         postEditForm.setContent(postResponseDto.getContent());
         postEditForm.setCategory(postResponseDto.getCategory());
+        postEditForm.setImages(images);
         return postEditForm;
     }
 

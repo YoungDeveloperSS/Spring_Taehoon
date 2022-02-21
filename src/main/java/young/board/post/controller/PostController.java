@@ -5,8 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import young.board.image.Image;
+import young.board.image.ImageService;
 import young.board.post.controller.form.PostCreateForm;
 import young.board.post.controller.form.PostEditForm;
+import young.board.post.controller.response.PostResponseDto;
+import young.board.post.controller.response.ShowPostListResponseDto;
 import young.board.post.service.PostResponseServiceDto;
 import young.board.post.service.PostService;
 import young.board.recommendation.RecommendationService;
@@ -22,25 +26,41 @@ import static young.board.message.ErrorMessage.PARAM_FORM_ERROR;
 @RequiredArgsConstructor
 @RequestMapping("/posts")
 public class PostController {
+    //TODO 내일 더 할것.
+    // createForm, editForm DTO로 변경
+    // images 역시 같이 왔다갔다.
+    // 실제 s3 사용해서 db에 사진 몇개 넣어보고, url로 왔다갔다 테스트해보기.
+
     private final PostService postService;
     private final RecommendationService recommendationService;
+    private final ImageService imageService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<PostResponseDto> showPostList(@RequestParam(defaultValue = "1") int page) {
+    public List<ShowPostListResponseDto> showPostList(@RequestParam(defaultValue = "1") int page) {
         List<PostResponseServiceDto> postResponseServiceDtos = postService.findAll(page);
         return postResponseServiceDtos.stream().map(postResponseServiceDto ->
-                        PostResponseDto.from(postResponseServiceDto,
-                                recommendationService.calculateLikesCnt(postResponseServiceDto.getId())))
+                        ShowPostListResponseDto.builder()
+                                .postResponseServiceDto(postResponseServiceDto)
+                                .likeNumberCnt(getLikeNumberCnt(postResponseServiceDto))
+                                .build())
                 .collect(Collectors.toList());
+    }
+
+    private Integer getLikeNumberCnt(PostResponseServiceDto postResponseServiceDto) {
+        return recommendationService.calculateLikesCnt(postResponseServiceDto.getId());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PostResponseDto> showPostDetail(@PathVariable Long id) {
         try {
             PostResponseServiceDto postResponseServiceDto = postService.findPost(id);
-            PostResponseDto postResponseDto = PostResponseDto.from(postResponseServiceDto,
-                    recommendationService.calculateLikesCnt(postResponseServiceDto.getId()));
+            List<Image> images = imageService.inqueryImagesUsingPostId(id);
+            PostResponseDto postResponseDto = PostResponseDto.builder()
+                    .postResponseServiceDto(postResponseServiceDto)
+                    .likeNumberCnt(getLikeNumberCnt(postResponseServiceDto))
+                    .images(images)
+                    .build();
             return ResponseEntity.ok(postResponseDto);
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
@@ -51,6 +71,7 @@ public class PostController {
     public ResponseEntity<Object> deletePost(@PathVariable Long id) {
         try {
             postService.deletePost(id);
+            imageService.deleteImagesThisPost(id);
             return ResponseEntity.ok("delete complete");
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
@@ -61,7 +82,8 @@ public class PostController {
     public ResponseEntity<PostEditForm> editPostForm(@PathVariable Long id) {
         try {
             PostResponseServiceDto postResponseDto = postService.findPost(id);
-            PostEditForm form = PostEditForm.createPostEditForm(postResponseDto);
+            List<Image> images = imageService.inqueryImagesUsingPostId(id);
+            PostEditForm form = PostEditForm.createPostEditForm(postResponseDto, images);
             return ResponseEntity.ok(form);
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
