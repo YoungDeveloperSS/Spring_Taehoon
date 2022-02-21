@@ -14,33 +14,33 @@ public class RecommendationController {
     private final RecommendationService recommendationService;
 
     @PostMapping("/posts/{postId}/like")
-    public ResponseEntity<String> likePost(@PathVariable Long postId, @RequestParam Long userId) {
+    public ResponseEntity<String> likePost(@PathVariable Long postId, @RequestParam(defaultValue = "1") Long userId) {
         try {
-            recommendationService.likePost(postId, userId);
-            return ResponseEntity.ok("like success"); //300번대로
+            Long recommendationId = recommendationService.likePost(postId, userId);
+            return ResponseEntity.ok().body("like success\nid = " + recommendationId);
+            // TODO 201로 줘야 하는건지 고민, 그리고 header, body 이 부분 http 잘 공부한 뒤 고민해보자.
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PostMapping("/posts/{postId}/dislike")
     public ResponseEntity<String> dislikePost(@PathVariable Long postId, @RequestParam Long userId) {
         try {
-            recommendationService.dislikePost(postId, userId);
-            return ResponseEntity.ok("dislike success");
+            Long recommendationId = recommendationService.dislikePost(postId, userId);
+            return ResponseEntity.ok().body("dislike success\nid = " + recommendationId);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PostMapping("/posts/{postId}/like-cancel")
     public ResponseEntity<String> cancelRecommendation(@PathVariable Long postId, @RequestParam Long userId) {
         try {
-            recommendationService.cancelLikeOrDislike(postId, userId);
-            return ResponseEntity.ok("cancel success");
+            Long recommendationId = recommendationService.cancelLikeOrDislike(postId, userId);
+            return ResponseEntity.ok("cancel success\nid = " + recommendationId);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-//        return "redirect:/posts/" + postId;
     }
 }

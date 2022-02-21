@@ -26,9 +26,6 @@ public class PostController {
     private final PostService postService;
     private final RecommendationService recommendationService;
 
-    // TODO : 분명 전체 페이지 수도 보내줘야 하는데, 어떻게 여러 개의 값을 보내주지? 지금 내가 생각을 잘못 하고 있는거같음.
-    //  나는 프론트엔드 애들이 가져다가 쓰는 코드를 만드는 중. 그렇다면 여러 url이 합쳐져서 하나의 페이지를 만드는 거 아닐까?
-    //  하나의 url에 하나의 화면에 들어가는 모든 값을 넣을 필요 없을까?
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<PostResponseDto> showPostList(@RequestParam(defaultValue = "1") int page) {

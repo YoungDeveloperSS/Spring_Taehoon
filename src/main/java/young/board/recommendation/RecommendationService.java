@@ -26,9 +26,9 @@ public class RecommendationService {
     private final UserRepository userRepository;
 
     public Integer calculateLikesCnt(Long postId) {
-        List<Recommendation> recommendations = likeRepository.findRecommendationsByPostId(postId);
+        List<Recommendation> recommendationsAboutThisPost = likeRepository.findRecommendationsByPostId(postId);
         Integer likeCnt = 0;
-        for (Recommendation recommendation : recommendations) {
+        for (Recommendation recommendation : recommendationsAboutThisPost) {
             if (recommendation.getRecommendationStatus() == RecommendationStatus.LIKE) {
                 likeCnt += 1;
             }
@@ -59,7 +59,8 @@ public class RecommendationService {
         recommendation.cancel();
         return recommendation.getId();
     }
-
+    // TODO user validate가 recommendationService 계층에 있어도 되겠지?
+    //  UserValidater를 만들어서 거기서 가져와 써야하나? 만들게 되면 static으로 만들어야 하나?
     private Users validateUserIsExisted(Long userId) {
         Optional<Users> wrappingUser = userRepository.findOne(userId);
         if (wrappingUser.isEmpty()) {
