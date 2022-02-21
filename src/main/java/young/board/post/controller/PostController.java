@@ -53,10 +53,6 @@ public class PostController {
         try {
             postService.deletePost(id);
             return ResponseEntity.ok("delete complete");
-//            TODO 질문하기 : 어떻게 RestController에서 redirect할 수 있지? 이 방식으로 하면 DELETE 기능이 존재 안안하고 에러가 뜨는데,
-//             아마 ~/posts DELETE가 실행되는 게 아닌가 싶음. 인터넷 찾아도 못찾겠다는 느낌. 질문 한 번 드려보자.
-
-//             return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("http://localhost:8080/posts")).build();
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         }
@@ -80,14 +76,12 @@ public class PostController {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             postService.update(id, form.getTitle(), form.getWriter(),
                     form.getContent(), form.getCategory());
-            //이런 경우 id값이 필요한거같은데, id 넘겨야 하나?
             return ResponseEntity.ok("update complete");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         }
-//        return "redirect:/posts/" + id;
     }
 
     @GetMapping("/new")
@@ -103,7 +97,6 @@ public class PostController {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             return ResponseEntity.ok("create complete");
-            //이런 경우 id값이 필요한거같은데, id 넘겨야 하나?
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         } catch (IllegalStateException e) {

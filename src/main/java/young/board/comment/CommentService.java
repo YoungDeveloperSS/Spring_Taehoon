@@ -19,7 +19,6 @@ import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CommentService {
-
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
 
