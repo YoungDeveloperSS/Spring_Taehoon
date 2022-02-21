@@ -20,11 +20,9 @@ public class Image {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
     private Users user;
 
     @Column(nullable = false)
@@ -37,7 +35,8 @@ public class Image {
     private Image(Post post, Users user, URI uri, Integer order) {
         Assert.notNull(post, "Post 들어오지 않음");
         Assert.notNull(user, "User 들어오지 않음");
-        Assert.notNull(uri, "이미지 URI 들어오지 않음.");
+        Assert.notNull(uri, "이미지 URI 들어오지 않음");
+        Assert.notNull(order, "순서가 들어오지 않음");
 
         this.post = post;
         this.user = user;

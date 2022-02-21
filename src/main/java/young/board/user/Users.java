@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Getter
 @Entity(name = "users")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC) //protected여야함. 테스트때문에
 public class Users {
     @Id @GeneratedValue
     @Column(name = "user_id")

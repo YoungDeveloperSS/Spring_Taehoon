@@ -48,21 +48,21 @@ class H2CommentRepositoryTest {
 
         comment1 = Comment.builder()
                 .post(post1)
-                .comment("댓글1")
+                .content("댓글1")
                 .writer("댓작성자1")
                 .build();
         commentRepository.save(comment1);
 
         comment2 = Comment.builder()
                 .post(post2)
-                .comment("댓글2")
+                .content("댓글2")
                 .writer("댓작성자2")
                 .build();
         commentRepository.save(comment2);
 
         comment3 = Comment.builder()
                 .post(post1)
-                .comment("댓글3")
+                .content("댓글3")
                 .writer("댓작성자3")
                 .build();
         commentRepository.save(comment3);

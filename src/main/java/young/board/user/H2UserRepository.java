@@ -2,6 +2,7 @@ package young.board.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
@@ -10,7 +11,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class H2UserRepository implements UserRepository {
     private final EntityManager em;
-
 
     @Override
     public Long save(Users user) {
