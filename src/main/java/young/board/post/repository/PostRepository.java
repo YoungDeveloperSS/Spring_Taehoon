@@ -1,6 +1,6 @@
 package young.board.post.repository;
 
-import young.board.domain.Post;
+import young.board.post.Post;
 
 import java.util.List;
 import java.util.Optional;

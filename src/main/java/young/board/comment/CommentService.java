@@ -3,8 +3,7 @@ package young.board.comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import young.board.domain.Comment;
-import young.board.domain.Post;
+import young.board.post.Post;
 import young.board.comment.repository.CommentRepository;
 import young.board.post.repository.PostRepository;
 

@@ -3,9 +3,9 @@ package young.board.post.service;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import young.board.domain.Category;
-import young.board.domain.Comment;
-import young.board.domain.Post;
+import young.board.post.Category;
+import young.board.comment.Comment;
+import young.board.post.Post;
 
 import java.time.LocalDateTime;
 import java.util.List;

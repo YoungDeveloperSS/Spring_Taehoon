@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.comment.CommentResponseDto;
 import young.board.comment.CommentService;
-import young.board.domain.Category;
-import young.board.domain.Comment;
+import young.board.post.Category;
+import young.board.comment.Comment;
 import young.board.post.service.PostService;
 import young.board.comment.repository.CommentRepository;
 

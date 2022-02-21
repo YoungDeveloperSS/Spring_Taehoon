@@ -1,10 +1,11 @@
-package young.board.domain;
+package young.board.comment;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
+import young.board.post.Post;
 
 import javax.persistence.*;
 

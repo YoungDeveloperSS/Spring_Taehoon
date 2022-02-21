@@ -1,8 +1,8 @@
 package young.board.post.controller;
 
 import lombok.Getter;
-import young.board.domain.Category;
-import young.board.domain.Comment;
+import young.board.post.Category;
+import young.board.comment.Comment;
 import young.board.post.service.PostResponseServiceDto;
 
 import java.time.LocalDateTime;

@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import young.board.domain.Category;
+import young.board.post.Category;
 import young.board.post.service.PostResponseServiceDto;
 
 import javax.validation.constraints.NotBlank;

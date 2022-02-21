@@ -1,7 +1,8 @@
-package young.board.domain;
+package young.board.post;
 
 import lombok.*;
 import org.springframework.util.Assert;
+import young.board.comment.Comment;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

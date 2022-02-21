@@ -1,6 +1,6 @@
 package young.board.comment.repository;
 
-import young.board.domain.Comment;
+import young.board.comment.Comment;
 
 import java.util.List;
 import java.util.Optional;

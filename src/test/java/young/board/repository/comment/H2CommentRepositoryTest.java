@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.comment.repository.CommentRepository;
-import young.board.domain.Category;
-import young.board.domain.Comment;
-import young.board.domain.Post;
+import young.board.post.Category;
+import young.board.comment.Comment;
+import young.board.post.Post;
 import young.board.post.repository.PostRepository;
 
 import java.util.List;

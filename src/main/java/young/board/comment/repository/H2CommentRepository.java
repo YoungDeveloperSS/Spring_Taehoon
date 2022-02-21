@@ -2,7 +2,7 @@ package young.board.comment.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import young.board.domain.Comment;
+import young.board.comment.Comment;
 
 import javax.persistence.EntityManager;
 import java.util.List;

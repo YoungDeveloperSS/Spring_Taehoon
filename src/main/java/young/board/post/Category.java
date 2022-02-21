@@ -1,4 +1,4 @@
-package young.board.domain;
+package young.board.post;
 
 import lombok.AccessLevel;
 import lombok.Getter;

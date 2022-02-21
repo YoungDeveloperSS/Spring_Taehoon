@@ -3,8 +3,8 @@ package young.board.post.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import young.board.domain.Category;
-import young.board.domain.Post;
+import young.board.post.Category;
+import young.board.post.Post;
 import young.board.post.repository.PostRepository;
 
 import java.util.List;

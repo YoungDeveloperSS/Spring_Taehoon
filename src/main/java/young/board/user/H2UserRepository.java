@@ -2,7 +2,6 @@ package young.board.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import young.board.domain.Users;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;

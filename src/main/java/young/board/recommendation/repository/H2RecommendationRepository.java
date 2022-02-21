@@ -2,7 +2,7 @@ package young.board.recommendation.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import young.board.domain.Recommendation;
+import young.board.recommendation.Recommendation;
 
 import javax.persistence.EntityManager;
 import java.util.List;

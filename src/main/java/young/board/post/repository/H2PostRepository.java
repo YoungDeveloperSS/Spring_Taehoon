@@ -2,7 +2,7 @@ package young.board.post.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import young.board.domain.Post;
+import young.board.post.Post;
 
 import javax.persistence.EntityManager;
 import java.util.List;

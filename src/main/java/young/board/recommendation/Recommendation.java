@@ -1,10 +1,12 @@
-package young.board.domain;
+package young.board.recommendation;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
+import young.board.post.Post;
+import young.board.user.Users;
 
 import javax.persistence.*;
 

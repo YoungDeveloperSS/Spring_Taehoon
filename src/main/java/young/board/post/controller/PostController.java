@@ -7,11 +7,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import young.board.post.controller.form.PostCreateForm;
 import young.board.post.controller.form.PostEditForm;
-import young.board.comment.CommentService;
 import young.board.post.service.PostResponseServiceDto;
 import young.board.post.service.PostService;
 import young.board.recommendation.RecommendationService;
-import young.board.domain.Category;
+import young.board.post.Category;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,7 +1,6 @@
 package young.board.comment;
 
 import lombok.Getter;
-import young.board.domain.Comment;
 
 @Getter
 public class CommentResponseDto {

@@ -1,6 +1,6 @@
 package young.board.recommendation.repository;
 
-import young.board.domain.Recommendation;
+import young.board.recommendation.Recommendation;
 
 import java.util.List;
 import java.util.Optional;

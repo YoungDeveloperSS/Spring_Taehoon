@@ -2,7 +2,7 @@ package young.board.post.controller.form;
 
 import lombok.Getter;
 import lombok.Setter;
-import young.board.domain.Category;
+import young.board.post.Category;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

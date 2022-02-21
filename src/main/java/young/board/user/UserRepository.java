@@ -1,7 +1,5 @@
 package young.board.user;
 
-import young.board.domain.Users;
-
 import java.util.Optional;
 
 public interface UserRepository {
