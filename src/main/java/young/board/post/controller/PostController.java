@@ -7,10 +7,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import young.board.image.Image;
 import young.board.image.ImageService;
-import young.board.post.controller.form.PostCreateForm;
-import young.board.post.controller.form.PostEditForm;
+import young.board.post.controller.request.PostCreateForm;
+import young.board.post.controller.request.PostEditForm;
 import young.board.post.controller.response.PostResponseDto;
-import young.board.post.controller.response.ShowPostListResponseDto;
+import young.board.post.controller.response.PostSummaryResponseDto;
 import young.board.post.service.PostResponseServiceDto;
 import young.board.post.service.PostService;
 import young.board.recommendation.RecommendationService;
@@ -37,10 +37,10 @@ public class PostController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ShowPostListResponseDto> showPostList(@RequestParam(defaultValue = "1") int page) {
+    public List<PostSummaryResponseDto> loadPostSummaryList(@RequestParam(defaultValue = "1") int page) {
         List<PostResponseServiceDto> postResponseServiceDtos = postService.findAll(page);
         return postResponseServiceDtos.stream().map(postResponseServiceDto ->
-                        ShowPostListResponseDto.builder()
+                        PostSummaryResponseDto.builder()
                                 .postResponseServiceDto(postResponseServiceDto)
                                 .likeNumberCnt(getLikeNumberCnt(postResponseServiceDto))
                                 .build())
