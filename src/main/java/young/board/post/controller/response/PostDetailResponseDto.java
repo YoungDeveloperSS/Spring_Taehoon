@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-public class PostResponseDto {
+public class PostDetailResponseDto {
 
     private Long id;
     private Category category;
@@ -26,7 +26,7 @@ public class PostResponseDto {
 
 
     @Builder
-    private PostResponseDto(PostResponseServiceDto postResponseServiceDto, List<Image> images, Integer likeNumberCnt) {
+    private PostDetailResponseDto(PostResponseServiceDto postResponseServiceDto, List<Image> images, Integer likeNumberCnt) {
         this.id = postResponseServiceDto.getId();
         this.title = postResponseServiceDto.getTitle();
         this.category = postResponseServiceDto.getCategory();

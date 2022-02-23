@@ -9,7 +9,7 @@ import young.board.image.Image;
 import young.board.image.ImageService;
 import young.board.post.controller.request.PostCreateForm;
 import young.board.post.controller.request.PostEditForm;
-import young.board.post.controller.response.PostResponseDto;
+import young.board.post.controller.response.PostDetailResponseDto;
 import young.board.post.controller.response.PostSummaryResponseDto;
 import young.board.post.service.PostResponseServiceDto;
 import young.board.post.service.PostService;
@@ -52,16 +52,16 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostResponseDto> showPostDetail(@PathVariable Long id) {
+    public ResponseEntity<PostDetailResponseDto> loadPostDetail(@PathVariable Long id) {
         try {
             PostResponseServiceDto postResponseServiceDto = postService.findPost(id);
             List<Image> images = imageService.inqueryImagesUsingPostId(id);
-            PostResponseDto postResponseDto = PostResponseDto.builder()
+            PostDetailResponseDto postDetailResponseDto = PostDetailResponseDto.builder()
                     .postResponseServiceDto(postResponseServiceDto)
                     .likeNumberCnt(getLikeNumberCnt(postResponseServiceDto))
                     .images(images)
                     .build();
-            return ResponseEntity.ok(postResponseDto);
+            return ResponseEntity.ok(postDetailResponseDto);
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         }
