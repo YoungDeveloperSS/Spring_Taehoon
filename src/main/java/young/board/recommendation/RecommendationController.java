@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static young.board.constants.PostConstant.TEMP_USER_ID;
+
 @Controller
 @RequiredArgsConstructor
 public class RecommendationController {
     private final RecommendationService recommendationService;
 
     @PostMapping("/posts/{postId}/like")
-    public ResponseEntity<String> likePost(@PathVariable Long postId, @RequestParam(defaultValue = "1") Long userId) {
+    public ResponseEntity<String> likePost(@PathVariable Long postId,
+                                           @RequestParam(defaultValue = TEMP_USER_ID) Long userId) {
         try {
             Long recommendationId = recommendationService.likePost(postId, userId);
             return ResponseEntity.ok().body("like success\nid = " + recommendationId);
@@ -25,7 +28,8 @@ public class RecommendationController {
     }
 
     @PostMapping("/posts/{postId}/dislike")
-    public ResponseEntity<String> dislikePost(@PathVariable Long postId, @RequestParam Long userId) {
+    public ResponseEntity<String> dislikePost(@PathVariable Long postId,
+                                              @RequestParam(defaultValue = TEMP_USER_ID) Long userId) {
         try {
             Long recommendationId = recommendationService.dislikePost(postId, userId);
             return ResponseEntity.ok().body("dislike success\nid = " + recommendationId);
@@ -35,7 +39,8 @@ public class RecommendationController {
     }
 
     @PostMapping("/posts/{postId}/like-cancel")
-    public ResponseEntity<String> cancelRecommendation(@PathVariable Long postId, @RequestParam Long userId) {
+    public ResponseEntity<String> cancelRecommendation(@PathVariable Long postId,
+                                                       @RequestParam(defaultValue = TEMP_USER_ID) Long userId) {
         try {
             Long recommendationId = recommendationService.cancelLikeOrDislike(postId, userId);
             return ResponseEntity.ok("cancel success\nid = " + recommendationId);

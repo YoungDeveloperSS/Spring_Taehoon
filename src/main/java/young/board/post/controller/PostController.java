@@ -26,10 +26,7 @@ import static young.board.message.ErrorMessage.PARAM_FORM_ERROR;
 @RequiredArgsConstructor
 @RequestMapping("/posts")
 public class PostController {
-    //TODO 내일 더 할것.
-    // createForm, editForm DTO로 변경
-    // images 역시 같이 왔다갔다.
-    // 실제 s3 사용해서 db에 사진 몇개 넣어보고, url로 왔다갔다 테스트해보기.
+    // TODO 실제 s3 사용해서 db에 사진 몇개 넣어보고, url로 왔다갔다 테스트해보기.
 
     private final PostService postService;
     private final RecommendationService recommendationService;
@@ -51,11 +48,11 @@ public class PostController {
         return recommendationService.calculateLikesCnt(postResponseServiceDto.getId());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PostDetailResponseDto> loadPostDetail(@PathVariable Long id) {
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostDetailResponseDto> loadPostDetail(@PathVariable Long postId) {
         try {
-            PostResponseServiceDto postResponseServiceDto = postService.findPost(id);
-            List<Image> images = imageService.inqueryImagesUsingPostId(id);
+            PostResponseServiceDto postResponseServiceDto = postService.findPost(postId);
+            List<Image> images = imageService.inqueryImagesUsingPostId(postId);
             PostDetailResponseDto postDetailResponseDto = PostDetailResponseDto.builder()
                     .postResponseServiceDto(postResponseServiceDto)
                     .likeNumberCnt(getLikeNumberCnt(postResponseServiceDto))
@@ -67,25 +64,27 @@ public class PostController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletePost(@PathVariable Long id) {
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<Object> deletePost(@PathVariable Long postId) {
         try {
-            postService.deletePost(id);
-            imageService.deleteImagesThisPost(id);
+            postService.deletePost(postId);
+            imageService.deleteImagesThisPost(postId);
             return ResponseEntity.ok("delete complete");
         } catch (IllegalStateException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<String> editPost(@PathVariable Long id, @ModelAttribute PostEditRequestDto form) {
+    @PatchMapping("/{postId}")
+    public ResponseEntity<String> editPost(@PathVariable Long postId,
+                                           @RequestParam(defaultValue = TEMP_USER_ID) Long userId,
+                                           @ModelAttribute PostEditRequestDto form) {
         //TODO 검증 -> View에서도 검증 해줘야함.
         try {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
-            postService.update(id, form.getTitle(), form.getWriter(),
+            postService.update(postId, form.getTitle(), form.getWriter(),
                     form.getContent(), form.getCategory());
-            imageService.updateImageInfos(id, TEMP_USER_ID, form.getImageInfos());
+            imageService.updateImageInfos(postId, userId, form.getImageInfos());
             return ResponseEntity.ok("update complete");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -95,12 +94,13 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createPost(@ModelAttribute PostCreateRequestDto form) {
+    public ResponseEntity<String> createPost(@RequestParam(defaultValue = TEMP_USER_ID) Long userId,
+                                             @ModelAttribute PostCreateRequestDto form) {
         //TODO 검증 -> View에서도 검증 해줘야함.
         try {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
-            imageService.uploadImagesThisPost(savedId, TEMP_USER_ID, form.getImageInfos());
+            imageService.uploadImagesThisPost(savedId, userId, form.getImageInfos());
             return ResponseEntity.ok("create complete");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
