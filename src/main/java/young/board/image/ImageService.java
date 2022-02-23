@@ -31,11 +31,11 @@ public class ImageService {
         //imageInfo가 아니라 requestServiceDTO가 더 괜찮은 이름일까? 그리고 저 세개를 묶어서 DTO로 만들어버려도 괜찮음.
         Post post = validatePost(postId);
         Users user = validateUser(userId);
-        saveEachImage(imageInfos, post, user);
+        uploadEachImage(imageInfos, post, user);
         return post.getId();
     }
 
-    private void saveEachImage(List<ImageInfo> imageInfos, Post post, Users user) {
+    private void uploadEachImage(List<ImageInfo> imageInfos, Post post, Users user) {
         for (ImageInfo imageInfo : imageInfos) {
             Image image = Image.builder()
                     .post(post)

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import young.board.image.Image;
+import young.board.image.ImageInfo;
 import young.board.post.Category;
 import young.board.post.service.PostResponseServiceDto;
 
@@ -41,6 +42,6 @@ public class PostEditRequestDto {
     @NotNull(message = CATEGORY_NOT_INPUT_ERROR)
     private Category category;
 
-    private List<Image> images;
+    private List<ImageInfo> imageInfos;
 
 }

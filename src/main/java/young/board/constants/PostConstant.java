@@ -7,4 +7,6 @@ public abstract class PostConstant {
     public static final int WRITER_MAX_LENGTH = 8;
     public static final int POST_CNT_PER_PAGE = 10;
 
+    public static final Long TEMP_USER_ID = 0L;
+
 }

@@ -85,6 +85,7 @@ public class PostController {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             postService.update(id, form.getTitle(), form.getWriter(),
                     form.getContent(), form.getCategory());
+            imageService.updateImageInfos(id, TEMP_USER_ID, form.getImageInfos());
             return ResponseEntity.ok("update complete");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
@@ -99,6 +100,7 @@ public class PostController {
         try {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
+            imageService.uploadImagesThisPost(savedId, TEMP_USER_ID, form.getImageInfos());
             return ResponseEntity.ok("create complete");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();

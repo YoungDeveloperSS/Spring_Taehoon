@@ -2,11 +2,14 @@ package young.board.post.controller.request;
 
 import lombok.Getter;
 import lombok.Setter;
+import young.board.image.ImageInfo;
 import young.board.post.Category;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.util.List;
 
 import static young.board.constants.PostConstant.*;
 import static young.board.message.ErrorMessage.*;
@@ -27,5 +30,7 @@ public class PostCreateRequestDto {
 
     @NotNull(message = CATEGORY_NOT_INPUT_ERROR)
     private Category category;
+
+    private List<ImageInfo> imageInfos;
 
 }
