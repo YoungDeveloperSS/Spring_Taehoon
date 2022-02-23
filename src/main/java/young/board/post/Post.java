@@ -18,7 +18,7 @@ import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
 

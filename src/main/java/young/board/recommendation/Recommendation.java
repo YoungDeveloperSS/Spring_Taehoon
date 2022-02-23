@@ -18,7 +18,7 @@ import static young.board.message.ErrorMessage.ALREADY_CLICKED_LIKE_ERROR;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Recommendation {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recommendation_id")
     private Long id;
 

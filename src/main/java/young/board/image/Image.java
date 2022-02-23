@@ -26,13 +26,13 @@ public class Image {
     private Users user;
 
     @Column(nullable = false)
-    private URI uri;
+    private String uri;
 
     @Column(name = "image_order")
     private Integer order;
 
     @Builder
-    private Image(Post post, Users user, URI uri, Integer order) {
+    private Image(Post post, Users user, String uri, Integer order) {
         Assert.notNull(post, "Post 들어오지 않음");
         Assert.notNull(user, "User 들어오지 않음");
         Assert.notNull(uri, "이미지 URI 들어오지 않음");

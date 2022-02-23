@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static young.board.constants.PostConstant.*;
@@ -31,6 +32,6 @@ public class PostCreateRequestDto {
     @NotNull(message = CATEGORY_NOT_INPUT_ERROR)
     private Category category;
 
-    private List<ImageInfo> imageInfos;
+    private List<ImageInfo> imageInfos = new ArrayList<>();
 
 }
