@@ -12,7 +12,7 @@ import static young.board.constants.PostConstant.*;
 import static young.board.message.ErrorMessage.*;
 
 @Getter @Setter
-public class PostCreateForm {
+public class PostCreateRequestDto {
 
     @NotBlank(message = TITLE_NOT_INPUT_ERROR)
     @Size(min = TITLE_MIN_LENGTH, max = TITLE_MAX_LENGTH, message = TITLE_LENGTH_ERROR)

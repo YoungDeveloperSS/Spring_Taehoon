@@ -22,7 +22,7 @@ import static young.board.message.ErrorMessage.CATEGORY_NOT_INPUT_ERROR;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PostEditForm {
+public class PostEditRequestDto {
 
     @Setter(AccessLevel.PRIVATE)
     private Long id;
@@ -42,16 +42,5 @@ public class PostEditForm {
     private Category category;
 
     private List<Image> images;
-
-    public static PostEditForm createPostEditForm(PostResponseServiceDto postResponseDto, List<Image> images) {
-        PostEditForm postEditForm = new PostEditForm();
-        postEditForm.setId(postResponseDto.getId());
-        postEditForm.setTitle(postResponseDto.getTitle());
-        postEditForm.setWriter(postResponseDto.getWriter());
-        postEditForm.setContent(postResponseDto.getContent());
-        postEditForm.setCategory(postResponseDto.getCategory());
-        postEditForm.setImages(images);
-        return postEditForm;
-    }
 
 }

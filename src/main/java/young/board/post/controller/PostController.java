@@ -7,8 +7,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import young.board.image.Image;
 import young.board.image.ImageService;
-import young.board.post.controller.request.PostCreateForm;
-import young.board.post.controller.request.PostEditForm;
+import young.board.post.controller.request.PostCreateRequestDto;
+import young.board.post.controller.request.PostEditRequestDto;
 import young.board.post.controller.response.PostDetailResponseDto;
 import young.board.post.controller.response.PostSummaryResponseDto;
 import young.board.post.service.PostResponseServiceDto;
@@ -78,20 +78,8 @@ public class PostController {
         }
     }
 
-    @GetMapping("/{id}/edit")
-    public ResponseEntity<PostEditForm> editPostForm(@PathVariable Long id) {
-        try {
-            PostResponseServiceDto postResponseDto = postService.findPost(id);
-            List<Image> images = imageService.inqueryImagesUsingPostId(id);
-            PostEditForm form = PostEditForm.createPostEditForm(postResponseDto, images);
-            return ResponseEntity.ok(form);
-        } catch (IllegalStateException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
     @PatchMapping("/{id}")
-    public ResponseEntity<String> editPost(@PathVariable Long id, @ModelAttribute PostEditForm form) {
+    public ResponseEntity<String> editPost(@PathVariable Long id, @ModelAttribute PostEditRequestDto form) {
         //TODO 검증 -> View에서도 검증 해줘야함.
         try {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
@@ -105,14 +93,8 @@ public class PostController {
         }
     }
 
-    @GetMapping("/new")
-    @ResponseStatus(HttpStatus.OK)
-    public PostCreateForm createPostForm() {
-        return new PostCreateForm();
-    }
-
     @PostMapping
-    public ResponseEntity<String> createPost(@ModelAttribute PostCreateForm form) {
+    public ResponseEntity<String> createPost(@ModelAttribute PostCreateRequestDto form) {
         //TODO 검증 -> View에서도 검증 해줘야함.
         try {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
