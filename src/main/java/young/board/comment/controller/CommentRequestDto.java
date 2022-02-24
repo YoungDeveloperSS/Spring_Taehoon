@@ -1,4 +1,4 @@
-package young.board.comment;
+package young.board.comment.controller;
 
 import lombok.Getter;
 import lombok.Setter;

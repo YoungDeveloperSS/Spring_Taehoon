@@ -1,6 +1,7 @@
-package young.board.comment;
+package young.board.comment.controller;
 
 import lombok.Getter;
+import young.board.comment.Comment;
 
 @Getter
 public class CommentResponseDto {
