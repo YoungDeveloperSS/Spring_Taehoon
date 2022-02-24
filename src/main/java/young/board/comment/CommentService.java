@@ -39,7 +39,6 @@ public class CommentService {
 
     @Transactional
     public Long update(Long commentId, String content, String writer) {
-        // 일일히 파라미터로 받기 싫으면 서비스 request DTO를 만들어라.
         Comment comment = validateCommentExist(commentId);
         comment.update(content, writer);
         return comment.getId();

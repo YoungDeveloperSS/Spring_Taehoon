@@ -60,8 +60,18 @@ public class Comment {
     }
 
     public void update(String content, String writer) {
+        validate(content,writer);
         this.content = content;
         this.writer = writer;
+    }
+
+    private void validate(String content, String writer) {
+        if (!StringUtils.hasText(content)) {
+            throw new IllegalArgumentException("댓글 내용이 입력되지 않았습니다.");
+        }
+        if (!StringUtils.hasText(writer)) {
+            throw new IllegalArgumentException("댓글 작성자가 입력되지 않았습니다.");
+        }
     }
 
     public void delete() {
