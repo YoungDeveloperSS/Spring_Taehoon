@@ -17,7 +17,7 @@ import java.net.URI;
 public class Image {
     @Id @GeneratedValue
     @Column(name = "image_id")
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;

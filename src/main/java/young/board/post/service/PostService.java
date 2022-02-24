@@ -3,21 +3,15 @@ package young.board.post.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import young.board.image.Image;
-import young.board.image.ImageInfo;
-import young.board.image.repository.ImageRepository;
 import young.board.post.Category;
 import young.board.post.Post;
 import young.board.post.repository.PostRepository;
-import young.board.user.UserRepository;
-import young.board.user.Users;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static young.board.message.ErrorMessage.NOT_EXIST_POST_ERROR;
-import static young.board.message.ErrorMessage.NOT_EXIST_USER_ERROR;
 
 @Service
 @Transactional(readOnly = true)

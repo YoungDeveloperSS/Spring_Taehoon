@@ -4,10 +4,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import young.board.image.Image;
-import young.board.image.ImageInfo;
+import young.board.image.ImageResponseDto;
+import young.board.image.ImageUpdateRequestDto;
 import young.board.post.Category;
-import young.board.post.service.PostResponseServiceDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -43,6 +42,6 @@ public class PostEditRequestDto {
     @NotNull(message = CATEGORY_NOT_INPUT_ERROR)
     private Category category;
 
-    private List<ImageInfo> imageInfos = new ArrayList<>();
+    private List<ImageUpdateRequestDto> imageInfos = new ArrayList<>();
 
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import young.board.image.Image;
+import young.board.image.ImageResponseDto;
 import young.board.image.ImageService;
 import young.board.post.controller.request.PostCreateRequestDto;
 import young.board.post.controller.request.PostEditRequestDto;
@@ -52,11 +53,11 @@ public class PostController {
     public ResponseEntity<PostDetailResponseDto> loadPostDetail(@PathVariable Long postId) {
         try {
             PostResponseServiceDto postResponseServiceDto = postService.findPost(postId);
-            List<Image> images = imageService.inqueryImagesUsingPostId(postId);
+            List<ImageResponseDto> imageResponseDtos = imageService.inqueryImagesUsingPostId(postId);
             PostDetailResponseDto postDetailResponseDto = PostDetailResponseDto.builder()
                     .postResponseServiceDto(postResponseServiceDto)
                     .likeNumberCnt(getLikeNumberCnt(postResponseServiceDto))
-                    .images(images)
+                    .imageResponseDtos(imageResponseDtos)
                     .build();
             return ResponseEntity.ok(postDetailResponseDto);
         } catch (IllegalStateException e) {
@@ -100,7 +101,7 @@ public class PostController {
         try {
             validatePostForm(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
             Long savedId = postService.save(form.getTitle(), form.getWriter(), form.getContent(), form.getCategory());
-            imageService.uploadImagesThisPost(savedId, userId, form.getImageInfos());
+            imageService.uploadImagesThisPost(savedId, userId, form.getImageRequestDtos());
             return ResponseEntity.ok("create complete");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
