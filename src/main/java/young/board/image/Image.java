@@ -6,10 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 import young.board.post.Post;
-import young.board.user.Users;
+import young.board.user.User;
 
 import javax.persistence.*;
-import java.net.URI;
 
 @Entity
 @Getter
@@ -23,7 +22,7 @@ public class Image {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Users user;
+    private User user;
 
     @Column(nullable = false)
     private String uri;
@@ -32,7 +31,7 @@ public class Image {
     private Integer order;
 
     @Builder
-    private Image(Post post, Users user, String uri, Integer order) {
+    private Image(Post post, User user, String uri, Integer order) {
         Assert.notNull(post, "Post 들어오지 않음");
         Assert.notNull(user, "User 들어오지 않음");
         Assert.notNull(uri, "이미지 URI 들어오지 않음");

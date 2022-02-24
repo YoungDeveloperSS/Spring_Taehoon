@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 import young.board.post.Post;
-import young.board.user.Users;
+import young.board.user.User;
 
 import javax.persistence.*;
 
@@ -26,13 +26,13 @@ public class Recommendation {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Users user;
+    private User user;
 
     @Enumerated(EnumType.STRING)
     private RecommendationStatus recommendationStatus;
 
     @Builder
-    private Recommendation(Post post, Users user) {
+    private Recommendation(Post post, User user) {
         Assert.notNull(post, "Post 들어오지 않음");
         Assert.notNull(user, "User 들어오지 않음");
 

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import young.board.post.Post;
-import young.board.user.Users;
+import young.board.user.User;
 import young.board.recommendation.repository.RecommendationRepository;
 import young.board.post.repository.PostRepository;
 import young.board.user.UserRepository;
@@ -59,8 +59,8 @@ public class RecommendationService {
     }
     // TODO user validate가 recommendationService 계층에 있어도 되겠지?
     //  UserValidater를 만들어서 거기서 가져와 써야하나? 만들게 되면 static으로 만들어야 하나?
-    private Users validateUserIsExisted(Long userId) {
-        Optional<Users> wrappingUser = userRepository.findOne(userId);
+    private User validateUserIsExisted(Long userId) {
+        Optional<User> wrappingUser = userRepository.findOne(userId);
         if (wrappingUser.isEmpty()) {
             throw new IllegalArgumentException(NOT_EXIST_USER_ERROR);
         }
@@ -77,7 +77,7 @@ public class RecommendationService {
 
     private Recommendation getRecommendation(Long postId, Long userId) {
         Post post = validatePostIsExisted(postId);
-        Users user = validateUserIsExisted(userId);
+        User user = validateUserIsExisted(userId);
         Optional<Recommendation> wrappingLike = likeRepository.findOneByPostIdAndUserId(postId, userId);
         if (wrappingLike.isEmpty()) {
             Recommendation recommendation = Recommendation.builder()
