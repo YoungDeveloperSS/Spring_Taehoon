@@ -45,10 +45,11 @@ public class Post {
 
     @Builder(builderClassName = "createPost", builderMethodName = "createPost")
     private Post(Category category, String title, String writer, String content) {
-        Assert.notNull(category, "Post 생성 중 카테고리가 빠졌습니다.");
-        Assert.hasText(title, "Post 생성 중 제목이 빠졌습니다.");
-        Assert.hasText(writer, "Post 생성 중 작성자가 빠졌습니다.");
-        Assert.hasLength(content, "Post 생성 중 내용이 빠졌습니다.");
+//        Assert.notNull(category, "Post 생성 중 카테고리가 빠졌습니다.");
+//        Assert.hasText(title, "Post 생성 중 제목이 빠졌습니다.");
+//        Assert.hasText(writer, "Post 생성 중 작성자가 빠졌습니다.");
+//        Assert.hasLength(content, "Post 생성 중 내용이 빠졌습니다.");
+        validatePostValues(category, title, writer, content);
         this.category = category;
         this.title = title;
         this.writer = writer;

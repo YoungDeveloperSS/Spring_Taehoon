@@ -34,7 +34,7 @@ public class PostDetailResponseDto {
         this.writer = postResponseServiceDto.getWriter();
         this.createDate = postResponseServiceDto.getCreateDate();
         this.content = postResponseServiceDto.getContent();
-        this.comments = postResponseServiceDto.getComments();
+        this.comments = postResponseServiceDto.getComments(); //TODO LAZY라 발생하는 문제가 있음. 블로그에 일단 기록해둠.
         this.images = images;
         this.likeNumberCnt = likeNumberCnt;
 
