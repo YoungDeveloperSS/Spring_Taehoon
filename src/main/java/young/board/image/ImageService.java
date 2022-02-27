@@ -52,7 +52,7 @@ public class ImageService {
     }
 
     private User validateUser(Long userId) {
-        Optional<User> parsingUser = userRepository.findOne(userId);
+        Optional<User> parsingUser = userRepository.findById(userId);
         if (parsingUser.isEmpty()) {
             throw new IllegalArgumentException(NOT_EXIST_USER_ERROR);
         }

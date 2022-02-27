@@ -9,7 +9,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     public Optional<User> findByStringId(String stringId);
 
-    public Long save(User user);
-//
-//    public Optional<User> findOne(Long id);
+    //    public Optional<User> findOne(Long id);
 }

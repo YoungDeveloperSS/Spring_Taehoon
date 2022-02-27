@@ -60,7 +60,7 @@ public class RecommendationService {
     // TODO user validate가 recommendationService 계층에 있어도 되겠지?
     //  UserValidater를 만들어서 거기서 가져와 써야하나? 만들게 되면 static으로 만들어야 하나?
     private User validateUserIsExisted(Long userId) {
-        Optional<User> wrappingUser = userRepository.findOne(userId);
+        Optional<User> wrappingUser = userRepository.findById(userId);
         if (wrappingUser.isEmpty()) {
             throw new IllegalArgumentException(NOT_EXIST_USER_ERROR);
         }
